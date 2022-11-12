@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-const OutlineButton = ({text, onClick}) => {
+const OutlineButton = ({text, onClick, className}) => {
   return (
-    <Button variant='outline-primary' onClick={onClick}>{text}</Button>
+    <Button className={className} variant='outline-primary' onClick={onClick}>{text}</Button>
   )
 }
 

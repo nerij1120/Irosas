@@ -8,20 +8,37 @@ import ContactsPage from './components/ContactsPage';
 import MenuPage from './components/MenuPage';
 import CategoryPage from './components/CategoryPage';
 import CartPage from './components/CartPage';
+import Admin from './components/admin/Admin';
+import Revenue from './components/admin/Revenue';
+import ManageAccountContainer from './components/admin/ManageAccountContainer';
+import ManageCategoryContainer from './components/admin/ManageCategoryContainer';
+import ManageDrinkContainer from './components/admin/ManageDrinkContainer';
+import CustomerFeedbacks from './components/admin/CustomerFeedback';
+import FeedbackDetail from './components/admin/FeedbackDetail';
+import NotFound from './components/NotFound';
 
 
 function App() {
   return (
-    <div className='w-100 h-100'  style={{ backgroundColor: "#F8FAFB" }}>
+    <div style={{ backgroundColor: "#F8FAFB" }}>
       <Routes>
         <Route exact path='/' element={<Home/>}>
-          <Route index path='home' element={<HomePage/>}/>
+          <Route index element={<HomePage/>}/>
           <Route path="contacts" element={<ContactsPage/>}/>
           <Route path="menu" element={<MenuPage/>}/>
           <Route path="category" element={<CategoryPage/>}/>
           <Route path='cart' element={<CartPage/>}/>
         </Route>
         <Route path='/login' element={<LoginPage/>}/>
+        <Route exact path="/admin" element={<Admin/>}>
+          <Route index element={<ManageAccountContainer/>}/>
+          <Route path="drinks" element={<ManageDrinkContainer/>}/>
+          <Route path="categories" element={<ManageCategoryContainer/>}/>
+          <Route path="revenue" element={<Revenue/>}/>
+          <Route path='feedbacks' element={<CustomerFeedbacks/>}/>
+          <Route path="feedbacks/:id" element={<FeedbackDetail/>}/>
+        </Route>
+        <Route path='/*' element={<NotFound/>}/>
       </Routes>
     </div>
   );

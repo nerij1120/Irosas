@@ -1,10 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import '../index.css';
 
-const PrimaryButton = ({text}) => {
+const PrimaryButton = ({text, className}) => {
   return (
-    <Button variant='primary'>{text}</Button>
+    <Button className={className} variant='primary'>{text}</Button>
   )
 }
 

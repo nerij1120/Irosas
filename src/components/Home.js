@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <MyNav/>
-      <main className='w-100 mt-4 p-3'>
+      <main className='mt-4 p-3'>
         <Outlet/>
       </main>
       <Footer/>

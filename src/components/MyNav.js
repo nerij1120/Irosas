@@ -16,14 +16,14 @@ const MyNav = () => {
   }
 
   return (
-    <Navbar expand="lg" bg="white">
+    <Navbar expand="lg" bg="white" className="me-2">
       <Container fluid>
-        <Navbar.Brand href="home" className="me-auto nav-brand"><h2 style={{ color: "#7D6E83" }}>Irosas</h2></Navbar.Brand>
+        <Navbar.Brand href="/" className="me-auto nav-brand"><h2 style={{ color: "#7D6E83" }}>Irosas</h2></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <SearchBox/>
           <Nav className="d-flex ms-auto">
-            <Nav.Link href="home" className='menu-item'>Trang chủ</Nav.Link>
+            <Nav.Link to href="/" className='menu-item'>Trang chủ</Nav.Link>
             <Nav.Link href="contacts" className='menu-item'>Liên hệ</Nav.Link>
             <Nav.Link href="menu" className='menu-item'>Thực đơn</Nav.Link>
             <Nav.Link href="category" className='menu-item'>Danh mục</Nav.Link>
@@ -34,7 +34,7 @@ const MyNav = () => {
               <Badge bg="secondary" className="ms-2 cart-badge">9</Badge>
             </Nav.Link>
           </Nav>
-          <OutlineButton text="Đăng nhập" className='d-flex' style={{ alignSelf: "flex-end" }} onClick={()=>onClick()}/>
+          <OutlineButton text="Đăng nhập" className='d-flex login-btn' onClick={()=>onClick()}/>
         </Navbar.Collapse>
       </Container>
     </Navbar>

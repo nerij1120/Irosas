@@ -5,9 +5,28 @@
 body{
   margin: 0;
   overflow: hidden;
-  width: 100vw !important;
-  height: 100vh !important;
+  overflow-y: scroll;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
+
+
+
+html {
+  height: -webkit-fill-available;
+}
+
+main {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 
 .btn-primary{
   background-color: #7D6E83 !important;
@@ -40,13 +59,15 @@ body{
   height: 24px;
 }
 
-
+.active{
+  background-color: #7D6E83 !important;
+}
 
 .cart-badge{
   background-color: #7D6E83 !important;
   position: absolute;
-  left: 11px;
-  top: 0px ;
+  left: 5px;
+  top: -5px ;
 }
 
 .menu-item{
@@ -66,8 +87,11 @@ body{
 }
 
 .form-control{
-  width: 350px !important;
   display: flex;
+}
+
+.search-bar{
+  width: 400px !important;
 }
 
 .form-control:focus{
@@ -120,10 +144,66 @@ hr.solid-vert {
   margin-left: 1rem !important;
 }
 
+.nav-link{
+  padding: 0 !important;
+}
+
+.nav-pills .nav-link{
+  border-radius: 0 !important;
+}
+
+.dropdown .dropdown-toggle{
+  color: black
+}
+
+.page-link{
+  color: black !important;
+}
+
+.active>.page-link{
+  background-color: #7D6E83 !important;
+  border-color: #796f7c !important;
+}
+
+.image-form{
+  position: relative;
+  cursor: pointer;
+}
+
+.image-form--label{
+  padding: 9px 15px;
+  border-radius: 4px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.image-form--input{
+  height: 150px;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.dropdown-account{
+  margin-right: .5rem;
+}
+
+.search-box{
+  margin: auto !important;
+}
+
+.login-btn{
+  align-self: flex-end;
+}
+
 
 @media (max-width: 1200px) {
-  .form-control{
-    width: 200px !important;
+  .search-bar{
+    width: 250px !important;
   }
   .menu-item{
     margin-right: 0.75rem !important;
@@ -137,21 +217,61 @@ hr.solid-vert {
 }
 
 @media (max-width: 992px){
+  .dropdown-account{
+    margin-right: auto !important;
+  }
   .nav-brand{
     margin-left: auto !important;
   }
   .menu-item{
     margin-top: 0.5rem !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+  .nav-item{
+    margin-top: 0.5rem !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
   }
   .cart-badge{
     left: 5px;
   }
   .cart-item{
     width: fit-content;
-    margin-top: 1rem !important;
+    margin-top: .5rem !important;
     margin-bottom: 0.5rem !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+  .search-box{
+    margin-top: .5rem !important;
+  }
+  .login-btn{
+    align-self: auto;
+    margin-right: auto !important;
+    margin-left: auto !important;
   }
 }
+
+/* Sidebar */
+.fixed-bar{
+  min-height: 100vh;
+  min-width: 17rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.admin-container{
+  width: (100vw - 17rem);
+  margin: 0 0 0 17rem !important;
+  transition: all 0.4s;
+}
+
 
 @font-face {
   font-family: 'DM Serif Display Regular';
@@ -161,9 +281,9 @@ hr.solid-vert {
   }
   
 
-  @font-face {
-  font-family: 'DM Serif Display Italic';
-  font-style: normal;
-  font-weight: normal;
-  src: local('DM Serif Display Italic'), url('./fonts/DMSerifDisplay-Italic.woff') format('woff');
-  }
+@font-face {
+font-family: 'DM Serif Display Italic';
+font-style: normal;
+font-weight: normal;
+src: local('DM Serif Display Italic'), url('./fonts/DMSerifDisplay-Italic.woff') format('woff');
+}

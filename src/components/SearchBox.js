@@ -6,15 +6,16 @@ import '../index.css';
 
 const SearchBox = () => {
   return (
-    <Form className="d-flex m-auto">
+    <Form className="d-flex search-box">
       <InputGroup className="input-group">
       <Form.Control
               type="search"
               placeholder="Tìm kiếm..."
               aria-label="Search"
               variant="dark"
+              className='search-bar'
           />
-        <Button variant='primary'>
+        <Button variant='primary' type='submit'>
           <FaSearch color='white'/>
         </Button>
       </InputGroup>
