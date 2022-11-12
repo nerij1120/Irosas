@@ -3,14 +3,12 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import img from "../img/login_bg.jpg";
-import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   return (
     <div
       style={{
-        background: `url(${img}) center center/cover`,
+        background: `url(${img}) no-repeat center center/cover`,
         height: "100vh",
         display: "flex",
         justifyContent: "center",
@@ -31,7 +29,7 @@ const LoginPage = () => {
           backgroundColor: "#DFD3C3",
         }}
       >
-        <Form className="mb-2">
+        <Form className="mt-4 mb-2">
           <Form.Group className="mb-3">
             <Form.Control
               type="text"
@@ -50,20 +48,23 @@ const LoginPage = () => {
             />
           </Form.Group>
 
-          <Button
-            style={{ width: "100%" }}
-            type="submit"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Login
+          <Form.Group className="mb-3">
+            <Form.Control
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              required
+            />
+          </Form.Group>
+
+          <Button style={{ width: "100%" }} type="submit">
+            Register
           </Button>
         </Form>
-        <p className="font-weight-normal">
-          Don't have an account?
-          <Link to="/register" className="text-dark m-2">
-            Register
+        <p className="mr-2">
+          Already have an account?
+          <Link to="/login" className="text-dark m-2">
+            Login
           </Link>
         </p>
       </div>

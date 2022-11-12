@@ -16,6 +16,8 @@ import ManageDrinkContainer from './components/admin/ManageDrinkContainer';
 import CustomerFeedbacks from './components/admin/CustomerFeedback';
 import FeedbackDetail from './components/admin/FeedbackDetail';
 import NotFound from './components/NotFound';
+import RegisterPage from "./components/RegisterPage";
+
 
 
 function App() {
@@ -29,7 +31,9 @@ function App() {
           <Route path="category" element={<CategoryPage/>}/>
           <Route path='cart' element={<CartPage/>}/>
         </Route>
-        <Route path='/login' element={<LoginPage/>}/>
+        <Route path="category" element={<CategoryPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route exact path="/admin" element={<Admin/>}>
           <Route index element={<ManageAccountContainer/>}/>
           <Route path="drinks" element={<ManageDrinkContainer/>}/>
