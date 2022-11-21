@@ -1,16 +1,20 @@
 import React, {useState, useRef} from 'react'
 import { Modal, Button, Form, Row } from 'react-bootstrap'
 import { BsCameraFill } from 'react-icons/bs'
+import { v4 } from 'uuid'
+import useDatabase from '../../hooks/useDatabase'
 
 
 const AddDrinkModal = (props) => {
   const [name, setName] = useState('')
-  const [category, setCategory] = useState(0)
+  const [category, setCategory] = useState("")
   const [price, setPrice] = useState(0)
   const [photo, setPhoto] = useState(null)
   const imageFormControl = useRef()
+  const { categories } = useDatabase()
 
   const changeHandler = (e) =>{
+    console.log(e.target.files[0])
     const file = e.target.files[0]
     const reader = new FileReader()
     const limit = 1024 * 1024 * 2
@@ -23,7 +27,39 @@ const AddDrinkModal = (props) => {
     reader.readAsDataURL(file)
   }
 
+  const onSubmit = (e)=>{
+    e.preventDefault()
+
+    if(!name){
+      alert("Vui lòng nhập tên thức uống")
+      return
+    }
+    if(!category){
+      alert("Vui Long chọn danh mục của thức uống")
+      return
+    }
+    if(!price){
+      alert("Vui lòng nhập giá của thức uống")
+      return
+    }
+    if(!photo){
+      alert("Vui lòng thêm hình cho thức uống")
+      return
+    }
+    const id = v4()
+    props.addDrink({id, name, category, price, photo})
+    console.log({id, name, category, price, photo})
+
+    setName("")
+    setCategory("")
+    setPrice(0)
+    setPhoto(null)
+
+    props.onHide()
+  }
+
   const openFileDialog = (e) =>{
+    e.preventDefault()
     imageFormControl.current.click()
   }
 
@@ -33,7 +69,7 @@ const AddDrinkModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Form style={{ backgroundColor:"#DFD3C3" }}>
+      <Form style={{ backgroundColor:"#DFD3C3" }} onSubmit={onSubmit}>
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100 text-center">
@@ -47,12 +83,15 @@ const AddDrinkModal = (props) => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCategory">
           <Form.Label>Danh mục</Form.Label>
-          <Form.Select aria-label="Default select example" value={category} onSelect={(e)=>setCategory(e.target.value)}>
-            <option value="0">Coffee</option>
-            <option value="1">Tea</option>
-            <option value="2">Milk Tea</option>
-            <option value="3">Ice Blended</option>
-            <option value="4">SoftDrink</option>
+          <Form.Select aria-label="Default select example" value={category} onChange={(e)=>setCategory(e.target.value)}>
+            {
+              categories.map((category)=> <option key={category.id} value={category.id}>{category.name}</option>)
+            }
+            {/* <option value="Coffee">Coffee</option>
+            <option value="Tea">Tea</option>
+            <option value="Milk Tea">Milk Tea</option>
+            <option value="Ice Blended">Ice Blended</option>
+            <option value="SoftDrink">SoftDrink</option> */}
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPrice" value={price} onChange={(e)=>setPrice(e.target.value)}>

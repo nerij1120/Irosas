@@ -1,27 +1,44 @@
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import { Container, Table } from 'react-bootstrap'
 import AddButton from './AddButton'
 import AdminPagination from './AdminPagination'
 import DrinkItem from './DrinkItem'
 import AddDrinkModal from './AddDrinkModal'
-import EditDrinkModal from './EditDrinkModal'
-import DeleteDrinkModal from './DeleteDrinkModal'
+import useDatabase from '../../hooks/useDatabase'
+
+let PageSize = 5;
 
 const DrinkTable = () => {
   const [showDrinkModal, setShowDrinkModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const {drinks, setDrinks} = useDatabase();
+
+  
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return drinks.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, drinks]);
 
   const openDrinkModal = () =>{
     setShowDrinkModal(true)
   }
 
-  const openEditModal = () =>{
-    setShowEditModal(true)
+  const handleAddDrink = (drink) =>{
+    setDrinks([...drinks, drink])
   }
 
-  const openDeleteModal = () =>{
-    setShowDeleteModal(true)
+  const handleEditDrink = (newDrink)=>{
+    console.log(newDrink)
+    setDrinks(
+      drinks.map((drink) => drink.id === newDrink.id ? newDrink : drink)
+    )
+  }
+
+  const handleDeleteDrink = (id)=>{
+    setDrinks(
+      drinks.filter((drink) => id !== drink.id)
+    )
   }
 
   return (
@@ -38,17 +55,19 @@ const DrinkTable = () => {
           </tr>
         </thead>
         <tbody>
-          <DrinkItem openEditModal={openEditModal} openDeleteModal={openDeleteModal}/>
-          <DrinkItem/>
-          <DrinkItem/>
-          <DrinkItem/>
-          <DrinkItem/>
+          {
+            drinks.length > 0 ? currentTableData.map((drink)=>
+            <DrinkItem key={drink.id} drink={drink} editDrink={handleEditDrink} deleteDrink={handleDeleteDrink}/>
+          ) : <h4>No Drink to show</h4>
+          }
         </tbody>
       </Table>
-      <AdminPagination className="d-flex ms-auto me-2  mt-5"/>
-      <AddDrinkModal show={showDrinkModal} onHide={()=>setShowDrinkModal(false)}/>
-      <EditDrinkModal show={showEditModal} onHide={()=>setShowEditModal(false)}/>
-      <DeleteDrinkModal show={showDeleteModal} onHide={()=>setShowDeleteModal(false)}/>
+      <AdminPagination className="d-flex ms-auto me-2  mt-5"
+      currentPage={currentPage}
+      totalCount={drinks.length}
+      pageSize={PageSize}
+      onPageChange={page=>setCurrentPage(page)}/>
+      <AddDrinkModal show={showDrinkModal} onHide={()=>setShowDrinkModal(false)}  addDrink={handleAddDrink}/>
     </Container>
   )
 }

@@ -8,10 +8,12 @@ body {
   overflow-y: scroll;
   width: 100vw;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
 
-
+#root{
+  height: 100vh;
+}
 
 html {
   height: -webkit-fill-available;
@@ -24,7 +26,7 @@ main {
   height: -webkit-fill-available;
   max-height: 100vh;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 
@@ -59,6 +61,26 @@ main {
   height: 24px;
 }
 
+.profile-title{
+  display:inline-block;
+  color:#444;
+  border:1px solid #CCC;
+  background:rgba(37, 89, 190, 0.47);
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  vertical-align:middle;
+  border-radius: 20px;
+  max-width: fit-content;
+  padding: 10px 50px;
+  text-align: center;
+}
+
+.profile-pic{
+  width: 350px !important;
+  height: 350px !important;
+  border-radius: 400px;
+  cursor: pointer;
+}
+
 .active{
   background-color: #7D6E83 !important;
 }
@@ -73,17 +95,27 @@ main {
 .menu-item {
   margin-right: 1.5rem !important;
   justify-items: center;
+  text-decoration: none;
+}
+
+.filter-picker{
+  width: 25%;
 }
 
 .cart-item {
   margin-right: 0.75rem !important;
   display: flex !important;
   align-items: center;
+  text-decoration: none;
 }
 
 .footer-row {
   color: white;
   align-items: center;
+}
+
+.full-height{
+  height: 100vh !important;
 }
 
 .form-control{
@@ -198,6 +230,16 @@ hr.solid-vert {
   align-self: flex-end;
 }
 
+.form-wrapper{
+  color:#444;
+  border:1px solid #CCC;
+  background:white;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor:pointer;
+  vertical-align:middle;
+  padding: 10px 30px;
+}
+
 
 @media (max-width: 1200px) {
   .search-bar{
@@ -215,6 +257,12 @@ hr.solid-vert {
 }
 
 @media (max-width: 992px){
+  .profile-card{
+    margin-top: 1rem !important;
+  }
+  .filter-picker{
+    width: 50%;
+  }
   .dropdown-account{
     margin-right: auto !important;
   }

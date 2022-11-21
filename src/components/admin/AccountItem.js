@@ -21,7 +21,7 @@ const AccountItem = ({account, editAccount, deleteAccount}) => {
             <td>{account.name}</td>
             <td>{account.email}</td>
             <td>{account.address}</td>
-            <td>{account.type === 1? "Nhân viên": "Quản lý"}</td>
+            <td>{account.type === 2? "Nhân viên": "Quản lý"}</td>
             <td>{account.phone}</td>
             <td>
               <EditButton openEditModal={openEditModal}/>

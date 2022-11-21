@@ -11,11 +11,11 @@ import MyNav from "./MyNav";
 import Footer from "./Footer";
 const Home = () => {
   return (
-    <div>
+    <div className="">
       <MyNav/>
-      <main className='mt-4 p-3'>
+      <div className='mt-4 p-3'>
         <Outlet/>
-      </main>
+      </div>
       <Footer />
     </div>
   );

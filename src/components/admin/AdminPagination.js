@@ -1,16 +1,45 @@
 import { Pagination } from 'react-bootstrap'
+import { useState } from 'react'
+import { usePagination, DOTS } from './usePagination';
 
-const AdminPagination = ({className}) => {
+const AdminPagination = ({className, onPageChange, totalCount, siblingCount = 1, currentPage, pageSize }) => {
+  const paginationRange = usePagination({
+    currentPage,
+    totalCount,
+    siblingCount,
+    pageSize
+  }); 
+
+  if(currentPage == 0 || paginationRange.length < 2){
+    return <></>;
+  }
+
+  const onNext = () => {
+    onPageChange(currentPage + 1);
+  };
+
+  const onPrevious = () => {
+    onPageChange(currentPage - 1);
+  };
+
+  let lastPage = paginationRange[paginationRange.length - 1];
+  
   return (
     <Pagination className={className}>
-      <Pagination.Item>Previous</Pagination.Item>
-      <Pagination.Item active>{1}</Pagination.Item>
-      <Pagination.Item>{2}</Pagination.Item>
-      <Pagination.Item>{3}</Pagination.Item>
-      <Pagination.Item>{4}</Pagination.Item>
-      <Pagination.Item>{5}</Pagination.Item>
-      <Pagination.Item>{6}</Pagination.Item>
-      <Pagination.Item>Next</Pagination.Item>
+      <Pagination.Item onClick={onPrevious} disabled={currentPage===1} >Previous</Pagination.Item>
+      {
+        paginationRange.map(pageNumber=>{
+          if(pageNumber === DOTS){
+            return <Pagination.Item>&#8230</Pagination.Item>;
+          }
+          return (
+            <Pagination.Item active={pageNumber===currentPage}
+              onClick={()=>onPageChange(pageNumber)}>{pageNumber}
+            </Pagination.Item>
+          );
+        })
+      }
+      <Pagination.Item onClick={onNext} disabled={currentPage===lastPage}>Next</Pagination.Item>
     </Pagination>
   )
 }

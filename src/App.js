@@ -17,13 +17,17 @@ import CustomerFeedbacks from './components/admin/CustomerFeedback';
 import FeedbackDetail from './components/admin/FeedbackDetail';
 import NotFound from './components/NotFound';
 import RegisterPage from "./components/RegisterPage";
+import ProfilePage from './components/admin/ProfilePage';
+import RequireAuth from './components/admin/RequireAuth';
+import Unauthorized from './components/Unauthorized';
 
 
 
 function App() {
   return (
-    <div style={{ backgroundColor: "#F8FAFB" }}>
+    <div className='w-100 full-height' style={{ backgroundColor: "#F8FAFB" }}>
       <Routes>
+        {/* Public Routes */}
         <Route exact path='/' element={<Home/>}>
           <Route index element={<HomePage/>}/>
           <Route path="contacts" element={<ContactsPage/>}/>
@@ -31,17 +35,27 @@ function App() {
           <Route path="category" element={<CategoryPage/>}/>
           <Route path='cart' element={<CartPage/>}/>
         </Route>
-        <Route path="category" element={<CategoryPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route exact path="/admin" element={<Admin/>}>
-          <Route index element={<ManageAccountContainer/>}/>
-          <Route path="drinks" element={<ManageDrinkContainer/>}/>
-          <Route path="categories" element={<ManageCategoryContainer/>}/>
-          <Route path="revenue" element={<Revenue/>}/>
-          <Route path='feedbacks' element={<CustomerFeedbacks/>}/>
-          <Route path="feedbacks/:id" element={<FeedbackDetail/>}/>
+        <Route path='/unauthorized' element={<Unauthorized/>}/>
+
+        {/* Protect These Routes */}
+        <Route element={<RequireAuth allowedRoles={[1]}/>}>
+          <Route exact path="/admin" element={<Admin/>}>
+            <Route index element={<ManageAccountContainer/>}/>
+            <Route path="drinks" element={<ManageDrinkContainer/>}/>
+            <Route path="categories" element={<ManageCategoryContainer/>}/>
+            <Route path="revenue" element={<Revenue/>}/>
+            <Route path='feedbacks' element={<CustomerFeedbacks/>}/>
+            <Route path="feedbacks/:id" element={<FeedbackDetail/>}/>
+          </Route>
         </Route>
+
+        <Route element={<RequireAuth allowedRoles={[1,2,3]} />}>
+          <Route path='/profile' element={<ProfilePage/>}/>
+        </Route>
+
+        {/* Not Found */}
         <Route path='/*' element={<NotFound/>}/>
       </Routes>
     </div>

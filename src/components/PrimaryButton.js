@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const PrimaryButton = ({text, className}) => {
+const PrimaryButton = ({text, className,style, onClick}) => {
   return (
-    <Button className={className} variant='primary'>{text}</Button>
+    <Button className={className} onClick={onClick} variant='primary' style={style}>{text}</Button>
   )
 }
 

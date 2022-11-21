@@ -1,16 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import AccountItem from './AccountItem'
 import AdminPagination from './AdminPagination'
 import DropDownButton from './DropDownButton'
 import { AiOutlinePlus } from 'react-icons/ai'
 import AddAccountModal from './AddAccountModal'
+import useAuth from '../../hooks/useAuth'
 
+let PageSize = 10;
 
 const AccountTable = () => {
   const [showStaffModal, setShowStaffModal] = useState(false);
   const [showManagerModal, setShowManagerModal] = useState(false);
-  const [accounts, setAccounts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const {accounts, setAccounts} = useAuth();
+  const [accountsData, setAccountsData] = useState([])
+  useEffect(()=>{
+    setAccountsData(accounts.filter((account)=> account.type !== 3))
+  }, [accounts])
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return accountsData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, accountsData]);
 
   const handleAddAccount = (newAccount) =>{
     setAccounts([...accounts, newAccount])
@@ -55,20 +68,24 @@ const AccountTable = () => {
           <th>Thao tác</th>
         </tr>
       </thead>
-      {accounts.length > 0 ?
+      {accountsData.length > 0 ?
 
       <tbody>
         <>
-          {accounts.map((acc)=>(
+          {currentTableData.map((acc)=>(
             <AccountItem key={acc.id} account={acc} editAccount={handleEditAccount} deleteAccount={handleDeleteAccount}/>
           ))}
         </>
       </tbody> : <h2>No Account to show</h2>
     } 
     </Table>
-    <AdminPagination className="d-flex ms-auto me-2  mt-5"/>
-    <AddAccountModal show={showStaffModal} onHide={()=>setShowStaffModal(false)} addAccount={handleAddAccount} type={1}/>
-    <AddAccountModal show={showManagerModal} onHide={()=>setShowManagerModal(false)} addAccount={handleAddAccount} type={2}/>
+    <AdminPagination className="d-flex ms-auto me-2  mt-5"
+      currentPage={currentPage}
+      totalCount={accountsData.length}
+      pageSize={PageSize}
+      onPageChange={page=>setCurrentPage(page)}/>
+    <AddAccountModal show={showStaffModal} onHide={()=>setShowStaffModal(false)} addAccount={handleAddAccount} type={2}/>
+    <AddAccountModal show={showManagerModal} onHide={()=>setShowManagerModal(false)} addAccount={handleAddAccount} type={1}/>
   </Container>
   )
 }

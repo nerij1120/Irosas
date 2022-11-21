@@ -1,15 +1,15 @@
 import React from 'react'
 import DetailButton from './DetailButton'
 
-const FeedbackItem = () => {
+const FeedbackItem = ({feedback}) => {
   return (
     <tr style={{ verticalAlign:"middle", backgroundColor: "white" }}>
-          <td>Nguyễn Văn A</td>
-          <td>Iced milk coffee</td>
-          <td>Cà phê ngon, giao nhanh</td>
-          <td>5.0/5.0</td>
+          <td>{feedback.userName}</td>
+          <td>{feedback.drinkName}</td>
+          <td>{feedback.comment}</td>
+          <td>{feedback.rating}/5.0</td>
           <td>
-            <DetailButton href="1"/>
+            <DetailButton href={`${feedback.id}`} />
           </td>
     </tr>
   )

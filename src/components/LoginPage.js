@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
 import img from "../img/login_bg.jpg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+
 
 const LoginPage = () => {
+  const { accounts, setAuth } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
+
+
+  const onSubmit = (e)  =>{
+    e.preventDefault();
+
+    // Check login
+    accounts.map(user=>{
+      if(user.email === email && user.password === password){
+        setAuth({ user });
+        setEmail("")
+        setPassword("")
+        navigate(from, {replace: true});
+      }
+    })
+  }
+
   return (
     <div
       style={{
@@ -31,13 +54,15 @@ const LoginPage = () => {
           backgroundColor: "#DFD3C3",
         }}
       >
-        <Form className="mb-2">
+        <Form className="mb-2" onSubmit={onSubmit}>
           <Form.Group className="mb-3">
             <Form.Control
               type="text"
               placeholder="Username"
               name="username"
               required
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -47,15 +72,14 @@ const LoginPage = () => {
               placeholder="Password"
               name="password"
               required
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
             />
           </Form.Group>
 
           <Button
             style={{ width: "100%" }}
             type="submit"
-            onClick={() => {
-              navigate("/");
-            }}
           >
             Login
           </Button>

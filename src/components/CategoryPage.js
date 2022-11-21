@@ -16,11 +16,8 @@ import Footer from "./Footer";
 const CategoryPage = () => {
   return (
     <div>
-      <MyNav />
+      <img style={{ width: "100%" }} src={slider} alt="" />
       <div>
-        <img style={{ width: "100%" }} src={slider} alt="" />
-      </div>
-      <div style={{ position: "relative" }}>
         <div>Danh mục thức uống</div>
         <div className="d-flex flex-column align-items-center">
           <div className="d-flex flex-row ">
@@ -76,7 +73,6 @@ const CategoryPage = () => {
           </div>
         </div>
       </div>
-      <Footer style={{ position: "relative" }} />
     </div>
   );
 };

@@ -1,27 +1,44 @@
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import { Container, Table } from 'react-bootstrap'
 import AddButton from './AddButton'
 import AdminPagination from './AdminPagination'
 import CategoryItem from './CategoryItem'
 import AddCategoryModal from './AddCategoryModal'
-import EditCategoryModal from './EditCategoryModal'
-import DeleteCategoryModal from './DeleteCategoryModal'
+import useDatabase from '../../hooks/useDatabase'
+
+let PageSize = 5;
+
 
 const CategoryTable = () => {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const {categories, setCategories} = useDatabase()
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return categories.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, categories]);
+
 
   const openCategoryModal = () =>{
     setShowCategoryModal(true)
   }
 
-  const openEditModal = () =>{
-    setShowEditModal(true)
+  const handleAddCategory = (category) =>{
+    setCategories([...categories, category])
   }
 
-  const openDeleteModal = () =>{
-    setShowDeleteModal(true)
+  const handleEditCategory = (newCategory)=>{
+    setCategories(
+      categories.map((category)=> category.id === newCategory.id ? newCategory : category)
+    )
+  }
+
+  const handleDeleteCategory = (id) =>{
+    setCategories(
+      categories.filter((category)=> id !== category.id)
+    )
   }
 
   
@@ -38,17 +55,19 @@ const CategoryTable = () => {
         </tr>
       </thead>
       <tbody>
-        <CategoryItem openEditModal={openEditModal} openDeleteModal={openDeleteModal}/>
-        <CategoryItem/>
-        <CategoryItem/>
-        <CategoryItem/>
-        <CategoryItem/>
+        {
+          categories.length > 0 ? 
+            currentTableData.map((category)=> <CategoryItem key={category.id} category={category} editCategory={handleEditCategory} deleteCategory={handleDeleteCategory}/>)
+          : <h4>No Category to show</h4>
+        }
       </tbody>
     </Table>
-    <AdminPagination className="d-flex ms-auto me-2 mt-5"/>
-    <AddCategoryModal show={showCategoryModal} onHide={()=>setShowCategoryModal(false)}/>
-    <EditCategoryModal show={showEditModal} onHide={()=>setShowEditModal(false)}/>
-    <DeleteCategoryModal show={showDeleteModal} onHide={()=>setShowDeleteModal(false)} />
+    <AdminPagination className="d-flex ms-auto me-2 mt-5"
+          currentPage={currentPage}
+          totalCount={categories.length}
+          pageSize={PageSize}
+          onPageChange={page=>setCurrentPage(page)}/>
+    <AddCategoryModal addCategory={handleAddCategory} show={showCategoryModal} onHide={()=>setShowCategoryModal(false)}/>
     </Container>
   )
 }
