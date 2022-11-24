@@ -1,0 +1,168 @@
+html {
+    background-color: white;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+div.menu {
+    color: #000;
+    width:100%;
+    height: 800pt;
+    background-color: #DFd3c3;
+}
+
+#webname {
+    margin-left:  20pt;
+    color: #7d6e83;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.header {
+    padding-top: 10pt;
+    border: gray solid 1px;
+}
+
+.content {
+    margin: 40px 20px 0px 20px;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 10px;
+    padding-top: 10pt;
+    padding-bottom: 10pt;
+}
+
+tr {
+    border: gray 1px solid;
+}
+
+td , th {
+    padding: 10px;
+    width: 15%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.sum {
+    margin-left: 50%;
+}
+
+#menu-button {
+    float: right;
+    width: 35%;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+button {
+    width: 90%;
+}
+
+#but1 {
+    background-color: #fff;
+    color: #7d6e83;
+    border-color: #7d6e83;
+    border-radius: 5px;
+}
+
+#but2 {
+    background-color: #DFd3c3;
+    color: #000;
+    border: #DFd3c3 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
+}
+
+#but3 {
+    background-color: #7d6e83;
+    color: #fff;
+    border: #DFd3c3 1px solid;
+    border-color: #fff;
+    border-radius: 5px;
+}
+
+
+#menu-button2 {
+    float: right;
+    width: 35%;
+    display: none;
+}
+
+#dialog {
+    margin-top: 60px;
+    border: #fff solid 1px;
+    background-color: #DFd3c3;
+    border-radius: 8px;
+    width: 70%;
+    margin-left: 40px;
+    padding-bottom: 60px;
+    display: none;
+}
+
+#dialog-header {
+    text-align: center;
+}
+
+#reason {
+    margin-left: 5%;
+}
+
+#text-reason {
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    border: solid 1px;
+    border-radius: 5px;
+    height: 150px;
+}
+
+#divbtn {
+    width: 35%;
+    height: 60px;
+    float: right;
+    margin-top: 10px;
+}
+
+.grid3 {
+    display: grid;
+    grid-template-columns: 45% 45%;
+}
+.grid4 {
+    display: grid;
+    grid-template-columns: 20% 20%;
+}
+#btn1 {
+    background-color: #b08fbd;
+    color: #fff;
+    border: 1px solid #7d6e83;
+    border-radius: 5px;
+}
+
+#btn2 {
+    background-color: #7d6e83;
+    color: #fff;
+    border: 1px solid #7d6e83;
+    border-radius: 5px;
+}
+#but_1{
+    background-color: #13be4d;
+    color: #fff;
+    border: 1px solid 13be4d;
+    border-radius: 3px;
+}
