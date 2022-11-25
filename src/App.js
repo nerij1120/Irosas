@@ -16,6 +16,7 @@ import ContactsPage from './components/ContactsPage';
 import Home from './components/Home';
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
+import Menu from './components/Menu';
 import MenuPage from './components/MenuPage';
 import NotFound from './components/NotFound';
 import RegisterPage from "./components/RegisterPage";
@@ -23,8 +24,6 @@ import OrderDetail from './components/staff/OrderDetail';
 import Staff from './components/staff/Staff';
 import StaffPage from './components/staff/StaffPage';
 import Unauthorized from './components/Unauthorized';
-
-
 
 function App() {
   return (

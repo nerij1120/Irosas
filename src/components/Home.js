@@ -1,19 +1,15 @@
 import React from "react";
 import {
-  Routes,
-  Route,
-  useRoutes,
-  useLocation,
-  Outlet,
+    Outlet
 } from "react-router-dom";
 
-import MyNav from "./MyNav";
 import Footer from "./Footer";
+import MyNav from "./MyNav";
 const Home = () => {
   return (
     <div className="">
       <MyNav/>
-      <div className='mt-4 p-3'>
+      <div className='pb-3'>
         <Outlet/>
       </div>
       <Footer />

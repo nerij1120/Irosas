@@ -57,6 +57,15 @@ main {
   align-items: center;
 }
 
+.btn-outline-light {
+  background-color: #fff !important;
+  color: #7d6e83 !important;
+  border-color: #fff !important;
+  --bs-btn-hover-color: #fff !important;
+  --bs-btn-hover-bg: #7d6e83 !important;
+  align-items: center;
+}
+
 .btn:hover {
   color: var(--bs-btn-hover-color) !important;
   background-color: var(--bs-btn-hover-bg) !important;
@@ -123,6 +132,58 @@ main {
   align-items: center;
 }
 
+.img-bestSeller {
+  width: 100%;
+  border-radius: 10pt 10pt 0 0;
+}
+
+.img-rcmCate {
+  position: relative;
+  width: 170px;
+  height: 199px;
+  margin-left: 26px;
+  z-index: 1;
+}
+#shape {
+  position: absolute;
+  bottom: 46px;
+  height: 112px;
+  width: 216px;
+  background-color: rgba(223, 211, 195, 1);
+  box-shadow: 0px 2px 4px rgba(76, 92, 107, 0.15);
+  border-radius: 10px;
+  z-index: 0;
+}
+
+#container-rcmd-cate {
+  position: relative;
+}
+
+
+.product-name {
+  font-family: 'Work Sans';
+  font-style: bold;
+  font-weight: 600;
+  color: black;
+}
+
+.product-price {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.view-cate {
+  font-family: 'Work Sans';
+}
+
+
+
 .full-height{
   height: 100vh !important;
 }
@@ -170,6 +231,12 @@ hr.solid {
   border-top: 2px solid #d0b8a8;
   align-items: center;
   width: 150px;
+}
+
+hr.hor-solid{
+  border-top: 2px solid #d0b8a8;
+  align-items: center;
+  width: 100%;
 }
 
 hr.solid-vert {
@@ -333,6 +400,33 @@ hr.solid-vert {
   transition: all 0.4s;
 }
 
+#p1 {
+  font-family: 'Kantumruy', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+  color: #7D6E83;
+}
+#p2 {
+
+  font-family: 'DM Serif Display';
+  font-style: italic;
+  font-size: 56px;
+  line-height: 48px;
+  color: #D0B8A8;
+}
+#p3 {
+
+  font-family: 'Work Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.view {
+  font-family: 'Work Sans';
+}
 
 @font-face {
   font-family: "DM Serif Display Regular";
