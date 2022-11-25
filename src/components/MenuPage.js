@@ -1,13 +1,17 @@
-import React from 'react'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import MenuItem from './MenuItem'
+import React from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import background from "../img/ContactPage/backgroudContact.png";
+import MenuItem from './MenuItem';
+
 
 const MenuPage = () => {
   return (
-    <div>
+    <div className='mb-5'>
         <Container fluid 
         style={{ 
-          backgroundImage: `url(/images/dau_trang.png`,
+          backgroundImage: `url(${background})`,
+          backgroundRepeat: 'no-repeat',
+          width: '100%',
           height: "80vh",
           backgroundSize:"100% 100%",
           display: "flex"

@@ -1,15 +1,19 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import background from "../img/ContactPage/backgroudContact.png";
 import MenuItem from './MenuItem';
 import RecommendCategory from './RecommendCategory';
 
+
 const HomePage = () => {
   return (
-    <div>
+    <div className='mb-5'>
         <Container fluid
         style={{ 
-          backgroundImage: `url(/images/dau_trang.png`,
+          backgroundImage: `url(${background})`,
+          backgroundRepeat: 'no-repeat',
+          width: '100%',
           height: "80vh",
           backgroundSize:"100% 100%",
           display: "flex"
@@ -92,7 +96,7 @@ const HomePage = () => {
                     </Button> {/* <!-----End headline-feature-product--> */}
                 </Col>
                 <hr class="hor-solid" />
-                <Row className='mt-3' style={{ justifyContent: "space-around"}}>
+                <Row className='mt-5' style={{ justifyContent: "space-around"}}>
                   <RecommendCategory image="assets/image/category/coffee.png" name="Coffee"/>
                   <RecommendCategory image="assets/image/category/tea.png" name="Tea"/>
                   <RecommendCategory image="assets/image/category/fruitjuice.png" name="Fruit Juice"/>

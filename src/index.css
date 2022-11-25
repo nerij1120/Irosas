@@ -137,6 +137,11 @@ main {
   border-radius: 10pt 10pt 0 0;
 }
 
+.img-cart {
+  width: 150px;
+}
+
+
 .img-rcmCate {
   position: relative;
   width: 170px;

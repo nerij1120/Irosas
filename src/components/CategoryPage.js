@@ -1,6 +1,4 @@
 import React from "react";
-import silderdanhmuc from "../img/CategoryPage/sliderdanhmuc.jpg";
-import slider from "../img/CategoryPage/slider.jpg";
 import s1 from "../img/CategoryPage/1.jpg";
 import s2 from "../img/CategoryPage/2.jpg";
 import s3 from "../img/CategoryPage/3.jpg";
@@ -10,7 +8,11 @@ import s6 from "../img/CategoryPage/6.jpg";
 import s7 from "../img/CategoryPage/7.jpg";
 import s8 from "../img/CategoryPage/8.jpg";
 import s9 from "../img/CategoryPage/9.jpg";
+import slider from "../img/CategoryPage/slider.jpg";
+import silderdanhmuc from "../img/CategoryPage/sliderdanhmuc.jpg";
+import background from "../img/ContactPage/backgroudContact.png";
 import MyNav from "./MyNav";
+
 import Footer from "./Footer";
 
 const CategoryPage = () => {

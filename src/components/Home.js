@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    Outlet
+  Outlet
 } from "react-router-dom";
 
 import Footer from "./Footer";
@@ -9,9 +9,7 @@ const Home = () => {
   return (
     <div className="">
       <MyNav/>
-      <div className='pb-3'>
-        <Outlet/>
-      </div>
+      <Outlet/>
       <Footer />
     </div>
   );
