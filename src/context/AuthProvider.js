@@ -27,7 +27,7 @@ export const AuthProvider = ({children}) =>{
     },
     {
       id: 3,
-      email: "customer@vinova.com.sg",
+      email: "customer@gmail.com",
       name: "Lu Hoang Anh",
       password: "123456",
       phone: "0837128983",

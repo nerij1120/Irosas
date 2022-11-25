@@ -1,10 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
+import useAuth from "../hooks/useAuth";
 import img from "../img/login_bg.jpg";
 
 const LoginPage = () => {
+  const { accounts, setAccounts } = useAuth()
+  const [ email, setEmail ] = useState("")
+  const [ password, setPassword ] = useState("")
+  const [ confirmPassword, setConfirmPassword ] = useState("")
+
+  const onSubmit = (e) =>{
+    e.preventDefault()
+
+    if(confirmPassword !== password){
+      alert("Mật khẩu xác nhận không khớp")
+      return;
+    }
+
+    var isExisted = false 
+    accounts?.map(user =>{
+        if(email === user.email){
+          alert("Email đã được sử dụng, vui lòng dùng Email khác");
+          isExisted = true
+        }
+      }
+    )
+
+    if(!isExisted){
+      const user = {
+        id: v4(),
+        email,
+        name: "",
+        password,
+        phone: "",
+        address: "",
+        type: 3,
+        photo: "/images/customer_profile.png"
+      }
+
+      setAccounts([...accounts, user])
+      alert("Tạo tài khoản thành công")
+    }
+    
+  }
+
   return (
     <div
       style={{
@@ -29,13 +71,15 @@ const LoginPage = () => {
           backgroundColor: "#DFD3C3",
         }}
       >
-        <Form className="mt-4 mb-2">
+        <Form className="mt-4 mb-2" onSubmit={onSubmit}>
           <Form.Group className="mb-3">
             <Form.Control
               type="text"
-              placeholder="Username"
-              name="username"
+              placeholder="Email"
+              name="email"
               required
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -45,6 +89,8 @@ const LoginPage = () => {
               placeholder="Password"
               name="password"
               required
+              value={password}
+              onChange={(e)=>setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -54,6 +100,8 @@ const LoginPage = () => {
               placeholder="Confirm Password"
               name="confirmPassword"
               required
+              value={confirmPassword}
+              onChange={(e)=>setConfirmPassword(e.target.value)}
             />
           </Form.Group>
 

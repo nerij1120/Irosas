@@ -1,8 +1,8 @@
-import React, {useState, useRef} from 'react'
-import { Button, Card, Col, Container, Row, Form } from 'react-bootstrap'
-import PrimaryButton from './../PrimaryButton'
+import React, { useRef, useState } from 'react'
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
 import useAuth from '../../hooks/useAuth'
+import PrimaryButton from './../PrimaryButton'
 
 const ProfilePage = (props) => {
   const {auth, setAuth} = useAuth();
@@ -60,7 +60,7 @@ const ProfilePage = (props) => {
         <Row>
           <Col>
             <Row className="justify-content-center">
-            <img className="profile-pic" src={photo?photo:"images/profile_pic.jpg"}  onClick={openFileDialog}/>
+            <img className="profile-pic" src={photo?photo:"images/profile_pic.jpg"}  onClick={openFileDialog} alt=""/>
               <PrimaryButton style={{ width:"350px", marginTop:"20px", padding:"10px 15px" }} text="Chỉnh sửa ảnh đại diện" onClick={openFileDialog}/>
               <Form className='image-form form-control'  style={{ display: "none" }} >
                 <input ref={imageFormControl} type="file" className='image-form--input' onChange={changeHandler}/>

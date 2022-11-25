@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
-import img from "../img/login_bg.jpg";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import img from "../img/login_bg.jpg";
 
 
 const LoginPage = () => {
-  const { accounts, setAuth } = useAuth();
+  const { auth, accounts, setAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,15 +20,26 @@ const LoginPage = () => {
     e.preventDefault();
 
     // Check login
+    var success = false
     accounts.map(user=>{
       if(user.email === email && user.password === password){
         setAuth({ user });
         setEmail("")
         setPassword("")
-        navigate(from, {replace: true});
+        success = true
       }
     })
+
+    if(!success){
+      alert("Tài khoản hoặc mật khẩu sai")
+    }
   }
+
+  useEffect(()=>{
+    if(auth?.user){
+      navigate(from, {replace: true});
+    }
+  }, [auth?.user])
 
   return (
     <div

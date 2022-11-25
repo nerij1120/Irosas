@@ -297,6 +297,12 @@ hr.solid-vert {
     margin-right: auto !important;
     margin-left: auto !important;
   }
+  hr.solid-vert{
+    border-right: 0;
+    border-top: 2px solid #d0b8a8;
+    width: 100vw;
+    margin: 0;
+  }
 }
 
 /* Sidebar */
