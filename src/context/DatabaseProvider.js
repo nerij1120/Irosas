@@ -71,6 +71,33 @@ export const DataBaseProvider = ({children}) =>{
       photo: "/images/category_5.png",
       quantity: 10,
     }
+  ]);
+
+  const [orders, setOrders] = useState([
+    {
+      id: 1,
+      name: "Lê Văn An",
+      address: "34/35 Nguyễn Thị Minh Khai",
+      status: "Đang giao hàng",
+      phone: "0832328590",
+      total: "34000",
+    },
+    {
+      id: 2,
+      name: "Nguyễn Hồng Ân",
+      address: "12/5 Tạ Quang Bửu",
+      status: "Chờ xác nhận",
+      phone: "0833658792",
+      total: "34000",
+    },
+    {
+      id: 3,
+      name: "Tô Minh Vũ",
+      address: "20/8 Lý Thường Kiệt",
+      status: "Đã giao",
+      phone: "0236589745",
+      total: "34000",
+    },
   ])
 
   useEffect(()=>{
@@ -78,7 +105,7 @@ export const DataBaseProvider = ({children}) =>{
   }, [drinks])
 
   return(
-    <DatabaseContext.Provider value={{ drinks, setDrinks, categories, setCategories }}>
+    <DatabaseContext.Provider value={{ drinks, setDrinks, categories, setCategories, orders, setOrders }}>
       {children}
     </DatabaseContext.Provider>
   )

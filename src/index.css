@@ -39,6 +39,15 @@ main {
   align-items: center;
 }
 
+.btn-secondary{
+  background-color: #DFD3C3 !important;
+  color: #000 !important;
+  border-color: #DFD3C3 !important;
+  --bs-btn-hover-color: #000 !important;
+  --bs-btn-hover-bg: #DFD3C3c4 !important;
+  align-items: center;
+}
+
 .btn-outline-primary {
   background-color: #fff !important;
   color: #7d6e83 !important;
