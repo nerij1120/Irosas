@@ -5,7 +5,7 @@ import OrderTable from './OrderTable'
 const StaffPage = () => {
   return (
     <div>
-        <TopAppBar title="Quản lý tài khoản"/>
+        <TopAppBar title="Quản lý đơn hàng"/>
         <OrderTable/>
     </div>
   )

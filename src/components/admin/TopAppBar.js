@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import { MdOutlineAccountCircle } from 'react-icons/md'
 import DropDownAccount from './DropDownAccount'
 
 const TopAppBar = ({title}) => {
@@ -10,8 +9,8 @@ const TopAppBar = ({title}) => {
         <Navbar.Brand style={{ visibility:"hidden" }}></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className='w-100'>
-            <Nav.Item>{title}</Nav.Item>
+          <Nav className='w-100 d-flex'>
+            <Nav.Item className='align-items-center d-flex'>{title}</Nav.Item>
             <DropDownAccount/>
           </Nav>
         </Navbar.Collapse>

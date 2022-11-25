@@ -15,7 +15,7 @@ const OrderDetail = () => {
 
   useEffect(()=>{
     if(params && params.id){
-      orders.map((ord)=> ord.id === params.id ? 
+      orders.map((ord)=> ord.id == params.id ? 
         setOrder(ord)
       : {})
     }
@@ -34,7 +34,7 @@ const OrderDetail = () => {
     console.log(order)
 
     setOrders(
-      orders.map((ord)=>ord.id === params.id ?
+      orders.map((ord)=>ord.id == params.id ?
         order : ord
       ) 
     )
@@ -51,7 +51,7 @@ const OrderDetail = () => {
 
     setOrders(
       orders.map(ord=>
-        ord.id === params.id ?
+        ord.id == params.id ?
         order : ord
       ) 
     )
@@ -75,7 +75,7 @@ const OrderDetail = () => {
   return (
     <div style={{ height:"100vh" }}>
       <TopAppBar title="Chi tiết đơn hàng"/>
-      <Container fluid className="px-4 d-flex align-items-center w-100 h-75" >
+      <Container fluid className="mt-3 px-4 d-flex align-items-center w-100 h-75" >
         <Row>
               <h4> Đơn hàng #{order.id}</h4>
               <p>
