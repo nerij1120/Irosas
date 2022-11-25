@@ -43,8 +43,9 @@ const CategoryPage = () => {
           </Col>
         </Row>
       </Container>
+      
+      <Container className="mt-4 mb-5">
       <p
-        className="ms-2"
         style={{
           fontFamily: "DM Serif Display",
           fontWeight: "700",
@@ -55,39 +56,38 @@ const CategoryPage = () => {
       >
         Danh mục thức uống
       </p>
-      <Container className="mt-4 text-center">
-        <Row className="mt-3 justify-content-md-center">
-          <Col className="col-md-3 col-sm-1">
+        <Row className="mt-3 justify-content-md-around">
+          <Col className="col-md-3">
             <CategoryItem src={s1} alt="s1" text="Coffee" />
           </Col>
-          <Col className="col-md-3 col-sm-1">
+          <Col className="col-md-3">
             <CategoryItem src={s2} alt="s1" text="Tea" />
           </Col>
-          <Col className="col-md-3 col-sm-1">
+          <Col className="col-md-3">
             <CategoryItem src={s3} alt="s1" text="Ice Blended" />
           </Col>
         </Row>
 
-        <Row className="mt-3 justify-content-md-center">
-          <Col className="col-md-3 col-sm-1">
+        <Row className="mt-3 justify-content-md-around">
+          <Col className="col-md-3">
             <CategoryItem src={s4} alt="s1" text="Chocolate" />
           </Col>
-          <Col className="col-md-3 col-sm-1">
+          <Col className="col-md-3">
             <CategoryItem src={s5} alt="s1" text="Fruit Juice" />
           </Col>
-          <Col className="col-md-3 col-sm-1">
+          <Col className="col-md-3">
             <CategoryItem src={s6} alt="s1" text="Mile Tea" />
           </Col>
         </Row>
 
-        <Row className="mt-3 justify-content-md-center">
-          <Col className="col-md-3 col-sm-1">
+        <Row className="mt-3 justify-content-md-around">
+          <Col className="col-md-3">
             <CategoryItem src={s7} alt="s1" text="Cocktail" />
           </Col>
-          <Col className="col-md-3 col-sm-1">
+          <Col className="col-md-3">
             <CategoryItem src={s8} alt="s1" text="Shakes" />
           </Col>
-          <Col className="col-md-3 col-sm-1">
+          <Col className="col-md-3">
             <CategoryItem src={s9} alt="s1" text="Soft Drink" />
           </Col>
         </Row>
