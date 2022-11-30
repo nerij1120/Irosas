@@ -19,7 +19,7 @@ const CartItem = ({image,name,quantity,price,className}) => {
         <Col  className='d-flex align-items-center'>
         <span className='ms-auto'>Số lượng:</span>
           <AiOutlineMinusCircle className='ms-3' style={{ width: "32px", height: "32px", cursor: "pointer" }}/>
-          <Form.Control min={1} className='ms-3' type='number' value={quantity} style={{ width: "50px"}}/>
+          <Form.Control min={1} className='ms-3 text-center' type='number' value={quantity} style={{ width: "50px"}}/>
           <AiOutlinePlusCircle className='ms-3 me-auto' style={{ width: "32px", height: "32px", cursor: "pointer" }}/>
         </Col>
         

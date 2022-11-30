@@ -7,41 +7,29 @@ import { Link } from "react-router-dom";
 import background from "../img/ContactPage/backgroudContact.png";
 import '../index.css';
 export default function ContactsPage() {
-  return (<
-    Container fluid style={
+  return (<Container fluid style={
       {
         backgroundImage: `url(${background})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize:"100% 100%",
         width: '100%',
-        height: '100vh'
+        height: '100vh',
+        display: "flex"
       }} >
 
-    <Row className="mb-9">
-      <Col lg="8">
-        <h1 className="display-4 mb-3" style={{ 
-          fontFamily: "Courier New Courier",
-          color: "#7d6e83", 
-          fontWeight: 600,
-          marginTop: "25%", 
-          marginLeft: "20%" }} id="p1"> ABOUT US </h1>
-
-        <h2 className="display-4 col-md-7 mb-2" style={{ 
-          fontFamily: "Courier New Courier", 
-          color: "burlywood", 
-          fontStyle: "italic", 
-          marginLeft: "20%" }} id="p2" > Bạn là bàn đạp để chúng tôi phát triển </h2>
-
-        <p class="display-8 col-md-5" style={{ 
-          fontFamily: "Courier New Courier", 
-          marginLeft: "20%" }} id="p3"> 
-        Với mục tiêu đem lại trải nghiệm tốt nhất cho khách hàng, 
-        IROSAS COFFEE luôn sẵn sàng phục vụ những sản phẩm tốt nhất cho mọi người!! 
-        </p>
+    <Row>
+      <Col xs={7} lg={6} className="d-flex" >
+        <Row className="ms-lg-5 my-auto h-50">
+          <h1 className="display-4" id="p1"> ABOUT US </h1>
+          <h2 className="display-4" id="p2" > Bạn là bàn đạp để chúng tôi phát triển </h2>
+          <p className="display-8" id="p3"> 
+          Với mục tiêu đem lại trải nghiệm tốt nhất cho khách hàng, IROSAS COFFEE luôn sẵn sàng phục vụ những sản phẩm tốt nhất cho mọi người!! 
+          </p>
+        </Row>
       </Col>
-      
-      <Col style={{ color:"#7d6e83" }}>
-        <p class="display-8" style={{ marginTop: "65%" }}>
+      <Col xs={5} lg={6} className="d-flex" style={{ color:"#7d6e83" }}>
+        <Row className="ms-lg-5 h-25 my-auto">
+        <p class="display-8">
           <FaRegEnvelope className="me-2"/>
           <a href="mailto:admin_irosas@gmail.com" className="menu-item nav-link d-inline-block">
             admin_irosas@gmail.com
@@ -52,6 +40,8 @@ export default function ContactsPage() {
           (917) 112 - 245 </p>
         <p class="display-8">
           <FaMapMarkerAlt className="me-2" />KTX Khu A - ĐHQG HCM </p>
+        </Row>
+        
       </Col>
     </Row>
   </Container>

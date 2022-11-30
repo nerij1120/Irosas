@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react'
-import { Modal, Button, Form, Row } from 'react-bootstrap'
+import React, { useRef, useState } from 'react'
+import { Button, Form, Modal, Row } from 'react-bootstrap'
 import { BsCameraFill } from 'react-icons/bs'
 import useDatabase from '../../hooks/useDatabase'
 
@@ -51,8 +51,8 @@ const EditDrinkModal = (props) => {
       return
     }
 
-    console.log({...props.drink, name: name, category: category, price: price, photo: photo})
-    props.editDrink({...props.drink, name: name, category: category, price: price, photo: photo})
+    console.log({...props.drink, name: name, category: +category, price: +price, photo: photo})
+    props.editDrink({...props.drink, name: name, category: +category, price: +price, photo: photo})
 
 
     props.onHide()

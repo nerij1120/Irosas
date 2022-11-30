@@ -13,10 +13,11 @@ import Revenue from './components/admin/Revenue';
 import CartPage from './components/CartPage';
 import CategoryPage from './components/CategoryPage';
 import ContactsPage from './components/ContactsPage';
+import DetailsPage from './components/DetailsPage';
+import HistoryPage from './components/HistoryPage';
 import Home from './components/Home';
 import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
-import Menu from './components/Menu';
 import MenuPage from './components/MenuPage';
 import NotFound from './components/NotFound';
 import RegisterPage from "./components/RegisterPage";
@@ -27,7 +28,7 @@ import Unauthorized from './components/Unauthorized';
 
 function App() {
   return (
-    <div className='w-100 full-height' style={{ backgroundColor: "#F8FAFB" }}>
+    <div className='full-height' style={{ backgroundColor: "#F8FAFB" }}>
       <Routes>
         {/* Public Routes */}
         <Route exact path='/' element={<Home/>}>
@@ -36,6 +37,10 @@ function App() {
           <Route path="menu" element={<MenuPage/>}/>
           <Route path="category" element={<CategoryPage/>}/>
           <Route path='cart' element={<CartPage/>}/>
+          <Route path='drinks/:id' element={<DetailsPage/>}/>
+          <Route element={<RequireAuth allowedRoles={[3]}/> }>
+            <Route path="/history" element={<HistoryPage/>}/>
+          </Route>
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

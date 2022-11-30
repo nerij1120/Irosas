@@ -14,19 +14,26 @@ import background from "../img/ContactPage/backgroudContact.png";
 import MyNav from "./MyNav";
 
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-scroll";
+import useDatabase from "../hooks/useDatabase";
 import CategoryItem from "./CategoryItem";
 import Footer from "./Footer";
 
 const CategoryPage = () => {
+
+  const {categories}  = useDatabase()
+
   return (
     <div>
       <Container
         fluid
         style={{
-          backgroundImage: `url(/images/dau_trang.png`,
+          backgroundImage: `url(${background})`,
+          backgroundRepeat: 'no-repeat',
+          width: '100%',
           height: "80vh",
-          backgroundSize: "100% 100%",
-          display: "flex",
+          backgroundSize:"100% 100%",
+          display: "flex"
         }}
       >
         <Row className="my-auto ms-5">
@@ -37,27 +44,29 @@ const CategoryPage = () => {
             nhau.
           </p>
           <Col>
-            <Button Button className="btn-default get">
-              Xem ngay <i class="fas fa-long-arrow-right" id="arrowGet"></i>
-            </Button>
+            <Link to="category-section" spy={true} smooth={true} duration={200}>
+              <Button Button className="btn-default get">
+                Xem ngay <i class="fas fa-long-arrow-down" id="arrowGet"></i>
+              </Button>
+            </Link>
+            
           </Col>
         </Row>
       </Container>
       
       <Container className="mt-4 mb-5">
       <p
-        style={{
-          fontFamily: "DM Serif Display",
-          fontWeight: "700",
-          fontSize: "36px",
-          lineHeight: "48px",
-          color: "#D0B8A8",
-        }}
+        id="p4"
       >
         Danh mục thức uống
       </p>
-        <Row className="mt-3 justify-content-md-around">
-          <Col className="col-md-3">
+        <Row className="mt-3 justify-content-around" name="category-section">
+          {
+            categories.map((category)=><Col xs={5} md={5} lg={4} xl={3} className="m-2 m-sm-1" key={category.id}>
+            <CategoryItem id={category.id} src={category.photo} text={category.name}/>
+          </Col>)
+          }
+          {/* <Col className="col-md-3">
             <CategoryItem src={s1} alt="s1" text="Coffee" />
           </Col>
           <Col className="col-md-3">
@@ -65,10 +74,10 @@ const CategoryPage = () => {
           </Col>
           <Col className="col-md-3">
             <CategoryItem src={s3} alt="s1" text="Ice Blended" />
-          </Col>
+          </Col> */}
         </Row>
 
-        <Row className="mt-3 justify-content-md-around">
+        {/* <Row className="mt-3 justify-content-md-around">
           <Col className="col-md-3">
             <CategoryItem src={s4} alt="s1" text="Chocolate" />
           </Col>
@@ -76,7 +85,7 @@ const CategoryPage = () => {
             <CategoryItem src={s5} alt="s1" text="Fruit Juice" />
           </Col>
           <Col className="col-md-3">
-            <CategoryItem src={s6} alt="s1" text="Mile Tea" />
+            <CategoryItem src={s6} alt="s1" text="Milk Tea" />
           </Col>
         </Row>
 
@@ -90,7 +99,7 @@ const CategoryPage = () => {
           <Col className="col-md-3">
             <CategoryItem src={s9} alt="s1" text="Soft Drink" />
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     </div>
   );

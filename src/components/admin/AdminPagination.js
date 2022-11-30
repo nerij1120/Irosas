@@ -1,6 +1,5 @@
-import { Pagination } from 'react-bootstrap'
-import { useState } from 'react'
-import { usePagination, DOTS } from './usePagination';
+import { Pagination } from 'react-bootstrap';
+import { DOTS, usePagination } from './usePagination';
 
 const AdminPagination = ({className, onPageChange, totalCount, siblingCount = 1, currentPage, pageSize }) => {
   const paginationRange = usePagination({
@@ -10,7 +9,7 @@ const AdminPagination = ({className, onPageChange, totalCount, siblingCount = 1,
     pageSize
   }); 
 
-  if(currentPage == 0 || paginationRange.length < 2){
+  if(currentPage === 0 || paginationRange.length < 2){
     return <></>;
   }
 
@@ -39,7 +38,7 @@ const AdminPagination = ({className, onPageChange, totalCount, siblingCount = 1,
           );
         })
       }
-      <Pagination.Item onClick={onNext} disabled={currentPage===lastPage}>Next</Pagination.Item>
+      <Pagination.Item onClick={onNext}  disabled={currentPage===lastPage}>Next</Pagination.Item>
     </Pagination>
   )
 }

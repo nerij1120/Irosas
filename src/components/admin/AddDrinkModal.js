@@ -1,5 +1,5 @@
-import React, {useState, useRef} from 'react'
-import { Modal, Button, Form, Row } from 'react-bootstrap'
+import React, { useRef, useState } from 'react'
+import { Button, Form, Modal, Row } from 'react-bootstrap'
 import { BsCameraFill } from 'react-icons/bs'
 import { v4 } from 'uuid'
 import useDatabase from '../../hooks/useDatabase'
@@ -7,7 +7,7 @@ import useDatabase from '../../hooks/useDatabase'
 
 const AddDrinkModal = (props) => {
   const [name, setName] = useState('')
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState(1)
   const [price, setPrice] = useState(0)
   const [photo, setPhoto] = useState(null)
   const imageFormControl = useRef()
@@ -47,11 +47,11 @@ const AddDrinkModal = (props) => {
       return
     }
     const id = v4()
-    props.addDrink({id, name, category, price, photo})
-    console.log({id, name, category, price, photo})
+    props.addDrink({id, name, category: +category, price: +price, photo})
+    console.log({id, name, category: +category, price: +price, photo})
 
     setName("")
-    setCategory("")
+    setCategory(1)
     setPrice(0)
     setPhoto(null)
 
@@ -94,9 +94,9 @@ const AddDrinkModal = (props) => {
             <option value="SoftDrink">SoftDrink</option> */}
           </Form.Select>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPrice" value={price} onChange={(e)=>setPrice(e.target.value)}>
+        <Form.Group className="mb-3" controlId="formBasicPrice" >
           <Form.Label>Giá</Form.Label>
-          <Form.Control type="number" placeholder="Nhập giá" />
+          <Form.Control type="number" placeholder="Nhập giá" value={price} onChange={(e)=>setPrice(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicImage">
           <Form.Label>Hình ảnh</Form.Label>

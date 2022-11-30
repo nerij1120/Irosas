@@ -1,10 +1,10 @@
-import React,{useState} from 'react'
-import EditButton from './EditButton'
-import DeleteButton from './DeleteButton'
+import React, { useState } from 'react';
 import logo from './../../img/login_bg.jpg';
+import DeleteButton from './DeleteButton';
+import DeleteCategoryModal from './DeleteCategoryModal';
+import EditButton from './EditButton';
+import EditCategoryModal from './EditCategoryModal';
 import SmallImage from './SmallImage';
-import EditCategoryModal from './EditCategoryModal'
-import DeleteCategoryModal from './DeleteCategoryModal'
 
 const CategoryItem = ({category, editCategory, deleteCategory}) => {
   const [showEditModal, setShowEditModal] = useState(false);

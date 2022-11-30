@@ -1,12 +1,15 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import useDatabase from "../hooks/useDatabase";
 import background from "../img/ContactPage/backgroudContact.png";
 import MenuItem from './MenuItem';
 import RecommendCategory from './RecommendCategory';
 
 
 const HomePage = () => {
+  const {drinks, categories} = useDatabase()
+
   return (
     <div className='mb-5'>
         <Container fluid
@@ -31,14 +34,19 @@ const HomePage = () => {
 
         <Container className='mt-4'> {/* <!----Body Part--> */}
             <Col className="d-flex align-items-center">  {/* <!-----headline-feature-product--> */}
-                <span id="p1">Bán chạy nhất</span>
+                <span id="p4">Bán chạy nhất</span>
                 <Button variant='outline-light' className="view ms-auto">Xem thực đơn
                     <FaLongArrowAltRight className='me-2 ms-2'/>
                 </Button> {/* <!-----End headline-feature-product--> */}
             </Col>
             
             <Row className='mt-3' style={{ justifyContent: "space-around"}}> {/* <!------Feature Product--> */}
-                <Col className="col-3">
+                {
+                  drinks.map((drink, idx)=>idx < 6? <Col md={5} lg={4} xl={3} xs={5}  className="m-2 m-sm-1" key={drink.id}>
+                  <MenuItem id={drink.id} img={drink.photo} name={drink.name} price={drink.price}/>
+                </Col>  : <></>)
+                }
+                {/* <Col className="col-3">
                   <MenuItem img="assets/image/blackcoffee.png" name="Black Coffee" price ="15.000đ" />
                 </Col>
                 <Col className="col-3">
@@ -46,9 +54,10 @@ const HomePage = () => {
                 </Col>
                 <Col className="col-3">
                   <MenuItem img="assets/image/strawberry.png" name="Strawberry Cocktail" price="39.000đ"/>
-                </Col> 
+                </Col>  */}
             </Row>
-            <Row className='mt-3' style={{ justifyContent: "space-around"}}> {/* <!------Feature Product--> */}
+            {/* <!------Feature Product--> */}
+            {/* <Row className='mt-3' style={{ justifyContent: "space-around"}}> 
                 <Col className="col-3">
                   <MenuItem img="assets/image/americano.png" name="Americano" price ="20.000đ" />
                 </Col>
@@ -58,15 +67,20 @@ const HomePage = () => {
                 <Col className="col-3">
                   <MenuItem img="assets/image/latte.png" name="Latte" price="19.000đ"/>
                 </Col> 
-            </Row>
+            </Row> */}
              {/* <!-------End Feature--> */}
 
             <div className="mt-4">
-                <span id="p1">Thức uống mới</span>
+                <span id="p4">Thức uống mới</span>
             </div>
 
-            <Row className='mt-3' style={{ justifyContent: "space-around"}}>
-                <Col className="col-3">
+            <Row  className='mt-3' style={{ justifyContent: "space-around"}}>
+              {
+                drinks.reverse().map((drink, idx) => idx < 6 ? <Col md={5} lg={4} xl={3} xs={5} className="m-2 m-sm-1" key={drink.id}>
+                <MenuItem id={drink.id} img={drink.photo} name={drink.name} price={drink.price}/>
+              </Col> : <></> )
+              }
+                {/* <Col className="col-3">
                   <MenuItem img="assets/image/icecoffee.png" name="Iced Milk Coffee" price ="15.000đ" />
                 </Col>
                 <Col className="col-3">
@@ -74,10 +88,11 @@ const HomePage = () => {
                 </Col>
                 <Col className="col-3">
                   <MenuItem img="assets/image/chocolate.png" name="Hot Chocolate" price="27.000đ"/>
-                </Col> 
+                </Col>  */}
             </Row>
-            <Row className='mt-3' style={{ justifyContent: "space-around"}}> {/* <!------New Product--> */}
-                <Col className="col-3">
+            {/* <!------New Product--> */}
+            {/* <Row className='mt-3' style={{ justifyContent: "space-around"}}>           
+                /* <Col className="col-3">
                   <MenuItem img="assets/image/orangejuice.png" name="Honey Orange Juice" price ="35.000đ" />
                 </Col>
                 <Col className="col-3">
@@ -86,21 +101,27 @@ const HomePage = () => {
                 <Col className="col-3">
                   <MenuItem img="assets/image/matcha.png" name="Matcha Ice Blended" price="39.000đ"/>
                 </Col> 
-            </Row>
+            </Row> */}
             {/* <!-------End New Product--> */}
             <Container fluid id="container-rcmd-cate">  {/* <!---Recommended Category--> */}
                 <Col className="d-flex mt-4 align-items-center">  {/* <!-----headline-feature-product--> */}
-                    <span id="p2">Danh mục thức uống</span>
+                    <span id="p4">Danh mục thức uống</span>
                     <Button variant="outline-light" className='view-cate ms-auto '>Xem tất cả danh mục
                         <FaLongArrowAltRight />
                     </Button> {/* <!-----End headline-feature-product--> */}
                 </Col>
                 <hr class="hor-solid" />
                 <Row className='mt-5' style={{ justifyContent: "space-around"}}>
-                  <RecommendCategory image="assets/image/category/coffee.png" name="Coffee"/>
+                  {
+                    categories.map((cate, idx)=>idx < 4 ? 
+                    <Col key={cate.id} xs={4} sm={5} md={5} lg={4} xl={2} className="text-center m-2">
+                      <RecommendCategory id={cate.id} image={cate.photo} name={cate.name}/>
+                    </Col>  : <></> )
+                  }
+                  {/* <RecommendCategory image="assets/image/category/coffee.png" name="Coffee"/>
                   <RecommendCategory image="assets/image/category/tea.png" name="Tea"/>
                   <RecommendCategory image="assets/image/category/fruitjuice.png" name="Fruit Juice"/>
-                  <RecommendCategory image="assets/image/category/cocktail.png" name="Cocktail"/>
+                  <RecommendCategory image="assets/image/category/cocktail.png" name="Cocktail"/> */}
                 </Row>
             </Container>  {/* <!---------End Recommended Category--> */}
         </Container> {/* <!-----End Body Part--> */}

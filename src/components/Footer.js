@@ -1,9 +1,7 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import {
-  FaRegEnvelope,
-  FaPhone,
-  FaMapMarkerAlt
+  FaMapMarkerAlt, FaPhone, FaRegEnvelope
 } from 'react-icons/fa'
 
 const Footer = () => {
@@ -16,16 +14,16 @@ const Footer = () => {
       </Container>
       
       <Container >
-        <Row className='ms-auto'>
-          <Col className='me-auto d-flex footer-row'>
+        <Row  className='ms-auto ms-sm-2 ms-xs-2'>
+          <Col md={5} sm={12} xs={12} className='d-flex footer-row'>
           <FaRegEnvelope style={{ color:"white", marginRight:"10px" }}/>
           admin.irosas@gmail.com
         </Col>
-        <Col className='me-auto d-flex footer-row'>
+        <Col md={3} sm={12} xs={12} className='d-flex footer-row'>
           <FaPhone style={{ color:"white", marginRight:"10px" }}/>
           (917) 112-245
         </Col>
-        <Col className=' d-flex footer-row'>
+        <Col md={4} sm={12} xs={12} className=' d-flex footer-row'>
           <FaMapMarkerAlt style={{ color:"white", marginRight:"10px" }}/>
           KTX Khu A - ĐHQG HCM
         </Col>

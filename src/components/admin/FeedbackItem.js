@@ -1,13 +1,18 @@
 import React from 'react'
+import useDatabase from '../../hooks/useDatabase'
 import DetailButton from './DetailButton'
 
 const FeedbackItem = ({feedback}) => {
+  const {drinks} = useDatabase()
+
   return (
     <tr style={{ verticalAlign:"middle", backgroundColor: "white" }}>
           <td>{feedback.userName}</td>
-          <td>{feedback.drinkName}</td>
+          <td>{
+            drinks.map((drink)=>drink.id ===feedback.drink?drink.name:<></>)
+          }</td>
           <td>{feedback.comment}</td>
-          <td>{feedback.rating}/5.0</td>
+          <td>{feedback.rating}/5</td>
           <td>
             <DetailButton href={`${feedback.id}`} />
           </td>

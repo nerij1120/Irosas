@@ -1,14 +1,16 @@
-import React, {useState} from 'react'
-import EditButton from './EditButton'
-import DeleteButton from './DeleteButton'
+import React, { useState } from 'react';
+import useDatabase from '../../hooks/useDatabase';
 import logo from './../../img/login_bg.jpg';
+import DeleteButton from './DeleteButton';
+import DeleteDrinkModal from './DeleteDrinkModal';
+import EditButton from './EditButton';
+import EditDrinkModal from './EditDrinkModal';
 import SmallImage from './SmallImage';
-import EditDrinkModal from './EditDrinkModal'
-import DeleteDrinkModal from './DeleteDrinkModal'
 
 const DrinkItem = ({drink, editDrink, deleteDrink}) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const {categories} = useDatabase()
 
   const openEditModal = () =>{
     setShowEditModal(true)
@@ -23,7 +25,10 @@ const DrinkItem = ({drink, editDrink, deleteDrink}) => {
     <tr style={{ verticalAlign:"middle", backgroundColor: "white" }}>
           <td>{drink.name}</td>
           <td><SmallImage src={drink.photo}/></td>
-          <td>{drink.category}</td>
+          <td>{drink.description}</td>
+          <td>{
+            categories.map((cate)=>cate.id === drink.category? cate.name : <></>)
+          }</td>
           <td>{drink.price.toLocaleString()}</td>
           <td>
             <EditButton openEditModal={openEditModal}/>

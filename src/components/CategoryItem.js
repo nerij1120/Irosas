@@ -1,9 +1,16 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
-const CategoryItem = ({ src, text, alt }) => {
+const CategoryItem = ({ id, src, text, alt }) => {
+  const navigate = useNavigate()
+
+  const navigateToMenu = () =>{      
+      navigate(`/menu?category=${id}`)
+  }
+
   return (
-    <Card style={{ borderRadius: "10pt" }}>
+    <Card style={{ borderRadius: "10pt", cursor: "pointer" }} onClick={navigateToMenu}>
       <Card.Img variant="top" className="img-bestSeller" src={src}alt={alt}/>
       <Card.ImgOverlay className="d-flex">
         <Card.Text className="ms-auto me-auto mt-auto" style={{ color: "white", textSize: "20px", fontWeight:"600" }}>

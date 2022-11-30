@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import useAuth from "../hooks/useAuth";
 import img from "../img/login_bg.jpg";
@@ -9,6 +10,7 @@ import img from "../img/login_bg.jpg";
 const LoginPage = () => {
   const { accounts, setAccounts } = useAuth()
   const [ email, setEmail ] = useState("")
+  const navigate = useNavigate()
   const [ password, setPassword ] = useState("")
   const [ confirmPassword, setConfirmPassword ] = useState("")
 
@@ -43,6 +45,8 @@ const LoginPage = () => {
 
       setAccounts([...accounts, user])
       alert("Tạo tài khoản thành công")
+
+      navigate(-1)
     }
     
   }
@@ -57,25 +61,25 @@ const LoginPage = () => {
         alignItems: "center",
       }}
     >
-      <div
+      <Container
+        className="px-5"
         style={{
-          height: "70%",
-          width: "30%",
+          width: "40%",
           display: "flex",
-          flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
           border: "1px solid #fff",
-          margin: "0 0 0 0",
+          borderRadius: "10pt",
           backgroundColor: "#DFD3C3",
         }}
       >
-        <Form className="mt-4 mb-2" onSubmit={onSubmit}>
+        <Row>
+        <h2 className="text-center mt-3" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontWeight: "600" }}>IROSAS COFFEE</h2>
+          <h3 className="text-center mt-2" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontWeight: "600" }}>Đăng ký</h3>
+        <Form className="mt-5" onSubmit={onSubmit}>
+          <Form.Label>Email</Form.Label>
           <Form.Group className="mb-3">
             <Form.Control
               type="text"
-              placeholder="Email"
               name="email"
               required
               value={email}
@@ -84,9 +88,9 @@ const LoginPage = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
+          <Form.Label>Mật khẩu</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Password"
               name="password"
               required
               value={password}
@@ -95,9 +99,9 @@ const LoginPage = () => {
           </Form.Group>
 
           <Form.Group className="mb-3">
+            <Form.Label>Nhập lại mật khẩu</Form.Label>
             <Form.Control
               type="password"
-              placeholder="Confirm Password"
               name="confirmPassword"
               required
               value={confirmPassword}
@@ -105,17 +109,18 @@ const LoginPage = () => {
             />
           </Form.Group>
 
-          <Button style={{ width: "100%" }} type="submit">
-            Register
+          <Button style={{ width: "100%" }} className="mt-3" type="submit">
+            Đăng ký
           </Button>
         </Form>
-        <p className="mr-2">
-          Already have an account?
+        <p className="mr-2  ms-auto me-auto mt-5 text-center">
+          Đã có tài khoản?
           <Link to="/login" className="text-dark m-2">
-            Login
+            Đăng nhập
           </Link>
         </p>
-      </div>
+        </Row>
+      </Container>
     </div>
   );
 };

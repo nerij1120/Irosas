@@ -1,11 +1,14 @@
 import React from 'react'
+import { AiFillCheckSquare } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import CancelButton from './CancelButton'
+import CheckButton from './CheckButton'
 
 const OrderItem = ({order}) => {
   const navigate = useNavigate()
 
   const onClick = () =>{
-    navigate('order/'+`${order.id}`)
+    navigate(`order/${order.id}`)
   }
 
   return (
@@ -16,7 +19,9 @@ const OrderItem = ({order}) => {
         <td style={{ color: order.status === "Chờ xác nhận" ? 'orange' : order.status === "Đã giao" ? 'green' : order.status === "Đã hủy" ? 'red' : ''  }}>{order.status}</td>
         <td>{order.total}</td>
         <td>
-
+            {
+              order.status === "Chờ xác nhận" ? <><CheckButton/><CancelButton/></> : order.status === "Đã giao" ? <></> : order.status === "Đã hủy" ? <></> : <CheckButton/>
+            }
         </td>
   </tr>
     

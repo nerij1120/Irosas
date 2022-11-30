@@ -1,10 +1,10 @@
-import React, {useState, useMemo} from 'react'
+import React, { useMemo, useState } from 'react'
 import { Container, Table } from 'react-bootstrap'
+import useDatabase from '../../hooks/useDatabase'
 import AddButton from './AddButton'
+import AddDrinkModal from './AddDrinkModal'
 import AdminPagination from './AdminPagination'
 import DrinkItem from './DrinkItem'
-import AddDrinkModal from './AddDrinkModal'
-import useDatabase from '../../hooks/useDatabase'
 
 let PageSize = 5;
 
@@ -33,6 +33,8 @@ const DrinkTable = () => {
     setDrinks(
       drinks.map((drink) => drink.id === newDrink.id ? newDrink : drink)
     )
+    console.log(drinks)
+
   }
 
   const handleDeleteDrink = (id)=>{
@@ -49,6 +51,7 @@ const DrinkTable = () => {
           <tr style={{ verticalAlign:"middle" }}>
             <th>Tên</th>
             <th>Hình ảnh</th>
+            <th>Giới thiệu</th>
             <th>Danh mục</th>
             <th>Giá</th>
             <th>Thao tác</th>

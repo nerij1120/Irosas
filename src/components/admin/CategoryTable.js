@@ -1,10 +1,10 @@
-import React, {useState, useMemo} from 'react'
+import React, { useMemo, useState } from 'react'
 import { Container, Table } from 'react-bootstrap'
+import useDatabase from '../../hooks/useDatabase'
 import AddButton from './AddButton'
+import AddCategoryModal from './AddCategoryModal'
 import AdminPagination from './AdminPagination'
 import CategoryItem from './CategoryItem'
-import AddCategoryModal from './AddCategoryModal'
-import useDatabase from '../../hooks/useDatabase'
 
 let PageSize = 5;
 
