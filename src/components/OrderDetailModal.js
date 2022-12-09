@@ -1,61 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Badge, Button, Form, Modal } from 'react-bootstrap'
-import { Link, useLocation } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import { v4 } from 'uuid'
-import useAuth from '../hooks/useAuth'
 import useDatabase from '../hooks/useDatabase'
 import PaymentItem from './PaymentItem'
 
-const Payment = (props) => {
-  const {auth} = useAuth()
+const OrderDetailModal = (props) => {
+  const {cart, foodInOrder, setOrders, orders} = useDatabase()
+  const [method, setMethod] = useState("COD")
+  const [myFood, setMyFood] = useState([])
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [address, setAddress] = useState("")
-  const {cart, setOrders, orders, setCart, foodInOrder, setFoodInOrder} = useDatabase()
-  const location = useLocation()
-  const [method, setMethod] = useState("COD")
+
+  useEffect(()=>{
+    setMyFood(
+      foodInOrder.filter((f)=>f.order === props.item?.id)
+    )
+    console.log(props.item)
+    setName(props.item?.name)
+    setPhone(props.item?.phone)
+    setAddress(props.item?.address)
+    setMethod(props.item?.method)
+
+  }, [foodInOrder, props])
 
   const onSubmit = (e) =>{
     e.preventDefault()
-    var currentdate = new Date(); 
-    var datetime =(currentdate.getMonth()+1) + "/"  
-                    + currentdate.getDate() + "/"
-                    + currentdate.getFullYear() + " "  
-                    + currentdate.getHours() + ":"  
-                    + currentdate.getMinutes()
-    const id = v4()
-    setOrders(
-      [
-        ...orders,
-        {
-          id: id,
-          name: name,
-          phone: phone,
-          address: address,
-          date: datetime,
-          status: "Chờ xác nhận",
-          method: method,
-          total: props.total + 15000,
-          user: auth?.user?.id
-        }
-      ]
-    )
 
-    const food = cart.map((c)=>({
-      ...c,
-      id: v4(),
-      order: id
-    }))
+    const o = orders.find(c=>c.id === props.item?.id)
+    o.name = name
+    o.phone = phone
+    o.address = address
+    o.method = method
 
-    setFoodInOrder(
-      [
-        ...foodInOrder,
-        ...food
-      ]
-    )
 
-    console.log(food)
+    setOrders(orders.map((order)=>order.id===o.id?o:order))
 
     Swal.mixin({
       toast: true,
@@ -65,15 +44,11 @@ const Payment = (props) => {
       timerProgressBar: true
     }).fire({
       icon: "success",
-      title: "Đặt hàng thành công"
+      title: "Cập nhật thành công"
     })
-
-
-    setCart([])
 
     props.onHide()
   }
-
 
   return (
     <Modal
@@ -86,21 +61,22 @@ const Payment = (props) => {
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100 text-center" style={{ color: "#7d6e83", fontStyle: "italic", fontSize: "30px" }}>
-          Thanh toán
+          {
+            (props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận") ? "Cập nhật đơn hàng" : "Chi tiết đơn hàng"
+          }
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
       {
-        auth?.user ? 
         (<div class="row g-5">
         <div class="col-md-5 col-lg-4 order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span>Giỏ hàng của bạn</span>
-            <Badge bg="secondary" className="rounded-pill">{cart.length}</Badge>
+            <Badge bg="secondary" className="rounded-pill">{myFood.length}</Badge>
           </h4>
           <ul class="list-group mb-3">
             {
-              cart.map((c)=><PaymentItem item={c}/>)
+              myFood.map((c)=><PaymentItem item={c}/>)
             }
             <div id="TIPS">
               <li class="list-group-item d-flex justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
@@ -113,7 +89,7 @@ const Payment = (props) => {
               </li>
               <li class="list-group-item d-flex justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
                 <span><strong>Tổng cộng (VND)</strong></span>
-                <h5 style={{ color: "#7D6E83" }}><strong>{(props.total+15000)?.toLocaleString()}đ</strong></h5>
+                <h5 style={{ color: "#7D6E83" }}><strong>{props.item?.total?.toLocaleString()}đ</strong></h5>
               </li>
             </div>
           </ul>
@@ -122,16 +98,16 @@ const Payment = (props) => {
           <h4 class="mb-3">Thông tin nhận hàng</h4>
             <div class="row g-3">
               <div class="col-sm-6">
-                <label for="firstName" class="form-label">Họ và tên</label>
-                <input type="text" class="form-control" id="Name" placeholder="Nguyễn Văn A" value={name} onChange={(e)=>setName(e.target.value)}  required/>
+                <label for="Name" class="form-label">Họ và tên</label>
+                <input type="text" class="form-control" id="Name" value={name} onChange={(e)=>setName(e.target.value)} required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <div class="invalid-feedback">
                   Vui lòng nhập họ và tên.
                 </div>
               </div>
   
               <div class="col-sm-6">
-                <label for="lastName" class="form-label">Số điện thoại</label>
-                <input type="tel" name="phone" class="form-control" id="lastName" placeholder="085..." value={phone} onChange={(e)=>setPhone(e.target.value)} required/>
+                <label for="phone" class="form-label">Số điện thoại</label>
+                <input type="tel" class="form-control" id="Phone" value={phone} onChange={(e)=>setPhone(e.target.value)} required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <div class="invalid-feedback">
                   Vui lòng nhập số điện thoại
                 </div>
@@ -139,7 +115,7 @@ const Payment = (props) => {
   
               <div class="col-12">
                 <label for="address" class="form-label">Địa chỉ</label>
-                <input type="text" name="address" class="form-control" id="address" placeholder="06 Quang Trung" value={address} onChange={(e)=>setAddress(e.target.value)} required/>
+                <input type="text" class="form-control" id="address" value={address} onChange={(e)=>setAddress(e.target.value)}required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <div class="invalid-feedback">
                   Vui lòng nhập địa chỉ nhận hàng.
                 </div>
@@ -152,19 +128,19 @@ const Payment = (props) => {
             <h4 class="mb-3">Thông tin thanh toán</h4>
             <div class="my-3">
               <div class="form-check">
-                <input id="cod" name="paymentMethod" value="COD" onChange={()=>setMethod("COD")} checked={method==="COD"} type="radio" class="form-check-input" required/>
+                <input id="cod" name="paymentMethod" value="COD" checked={method==="COD"} onChange={()=>setMethod("COD")} type="radio" class="form-check-input" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <label class="form-check-label" for="credit">Thanh toán khi nhận hàng</label>
               </div>
               <div class="form-check">
-                <input id="credit" name="paymentMethod" value="Credit" onChange={()=>setMethod("Credit")} checked={method==="Credit"} type="radio" class="form-check-input" required/>
+                <input id="credit" name="paymentMethod" value="Credit" checked={method==="Credit"}  onChange={()=>setMethod("Credit")}type="radio" class="form-check-input" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <label class="form-check-label" for="credit">Thẻ tín dụng</label>
               </div>
               <div class="form-check">
-                <input id="debit" name="paymentMethod" value="Debit" onChange={()=>setMethod("Debit")} checked={method==="Debit"} type="radio" class="form-check-input" required/>
+                <input id="debit" name="paymentMethod" value="Debit" checked={method==="Debit"}  onChange={()=>setMethod("Debit")}type="radio" class="form-check-input" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <label class="form-check-label" for="debit">Thẻ ghi nợ</label>
               </div>
               <div class="form-check">
-                <input id="paypal" name="paymentMethod" value="Paypal" onChange={()=>setMethod("Paypal")} checked={method==="Paypal"} type="radio" class="form-check-input" required/>
+                <input id="paypal" name="paymentMethod" value="Paypal" checked={method==="Paypal"} onChange={()=>setMethod("Paypal")}type="radio" class="form-check-input" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <label class="form-check-label" for="paypal">PayPal</label>
               </div>
             </div>
@@ -173,7 +149,7 @@ const Payment = (props) => {
               <div class="row gy-3">
               <div class="col-md-6">
                 <label for="cc-name" class="form-label">Tên trên thẻ</label>
-                <input type="text" class="form-control" id="cc-name" placeholder="" required/>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <small class="text-muted">Tên đầy đủ được ghi trên thẻ</small>
                 <div class="invalid-feedback">
                   Vui lòng nhập tên trên thẻ
@@ -182,7 +158,7 @@ const Payment = (props) => {
   
               <div class="col-md-6">
                 <label for="cc-number" class="form-label">Số thẻ tín dụng</label>
-                <input type="number" class="form-control" id="cc-number" placeholder="" required/>
+                <input type="number" class="form-control" id="cc-number" placeholder="" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <div class="invalid-feedback">
                   Vui lòng nhập số thẻ tín dụng
                 </div>
@@ -190,14 +166,14 @@ const Payment = (props) => {
   
               <div class="col-md-6">
                 <label for="cc-expiration" class="form-label">Ngày hết hạn</label>
-                <input type="date" class="form-control" id="cc-expiration" placeholder="" required/>
+                <input type="date" class="form-control" id="cc-expiration" placeholder="" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <div class="invalid-feedback">
                   Vui lòng nhập ngày hết hạn
                 </div>
               </div>
               <div class="col-md-6">
                 <label for="cc-cvv" class="form-label">CVC/CVV</label>
-                <input type="number" class="form-control" id="cc-cvv" placeholder="" required/>
+                <input type="number" class="form-control" id="cc-cvv" placeholder="" required disabled={!(props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận")}/>
                 <div class="invalid-feedback">
                   Vui lòng nhập mã bảo mật
                 </div>
@@ -206,25 +182,19 @@ const Payment = (props) => {
             }
             
         </div>
-      </div>) :
-      (<div className='text-center'>
-        <h3>Vui lòng đăng nhập để thanh toán</h3>
-        <Link to="/login" state={{ from: location }} replace><Button>Đăng nhập</Button></Link>
       </div>)
-
       }
       
       </Modal.Body>
-      {
-        auth?.user ?
         <Modal.Footer>
-        <Button variant="primary" type="submit" className="w-100">Thanh toán</Button>
-      </Modal.Footer> : <></>
-      }
-      
+          {
+            (props.item?.status === "Đang pha chế" || props.item?.status === "Chờ xác nhận") ? <Button variant="primary" type="submit" className="w-100">Cập nhật</Button> : <></>
+          }
+          
+        </Modal.Footer>
       </Form>
     </Modal>
   )
 }
 
-export default Payment
+export default OrderDetailModal

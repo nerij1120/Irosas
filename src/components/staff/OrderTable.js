@@ -24,10 +24,11 @@ const OrderTable = () => {
         <tr style={{ verticalAlign:"middle" }}>
             <th>#</th>
             <th>Tên</th>
-            <th>Địa chỉ</th>
+            <th style={{ width: "30%" }}>Địa chỉ</th>
             <th>Trạng thái</th>
+            <th>Ngày đặt</th>
             <th>Tổng đơn</th>
-            <th>Thao tác</th>
+            <th style={{ width: "20%" }}>Thao tác</th>
         </tr>
       </thead>
       {orders.length > 0 ?

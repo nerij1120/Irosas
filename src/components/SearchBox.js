@@ -21,7 +21,7 @@ const SearchBox = ({prevSearch, className}) => {
   }, [prevSearch])
 
   return (
-    <Form className="d-flex search-box " onSubmit={onSubmit}>
+    <Form className="d-flex search-box" onSubmit={onSubmit}>
       <InputGroup className="input-group">
       <Form.Control
               type="search"

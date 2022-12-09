@@ -1,28 +1,26 @@
-//type:       "npm i mdb-react-ui-kit"
-import {
-  MDBBtn,
-  MDBCol,
-  MDBContainer,
-  MDBIcon,
-  MDBInput, MDBInputGroup, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader,
-  MDBModalTitle, MDBRadio, MDBRow,
-  MDBTable,
-  MDBTableBody,
-  MDBTableHead
-} from "mdb-react-ui-kit";
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { useNavigate } from 'react-router';
+import { animateScroll as scroll } from 'react-scroll';
+import useDatabase from "../hooks/useDatabase";
 import background from "../img/ContactPage/backgroudContact.png";
 import CartItem from "./CartItem";
 import Payment from "./Payment";
 
 const CartPage = () => {
-  const [gridModal, setGridModal] = useState(false);
-
-  const toggleShow = () => setGridModal(!gridModal);
-
+  const {cart, drinks} = useDatabase()
   const [paymentModal, setShowPaymentModal] = useState(false);
-  const showModal = () => setShowPaymentModal(true)
+  const [sum, setSum] = useState(0)
+  const s = useRef(0)
+  const navigate = useNavigate()
+
+
+  useEffect(()=>{
+    s.current = 0
+    cart.map((c)=>drinks.map((drink)=>drink.id === c.drink?s.current+=c.quantity*drink.price:<></>))
+    setSum(s.current)
+  }, [cart, drinks])
+
 
   return (
     <div>
@@ -36,7 +34,7 @@ const CartPage = () => {
           display: "flex"
         }}> {/* <!------Introducer --> */}
           <Row className='my-auto ms-5'>
-            <p id="p1">Thưởng thức hương vị</p>
+            <p id="p1">Thưởng thức hương vị</p> 
             <p id="p2">nguyên chất</p>
             <p id="p3">Sự hài lòng của bạn là niềm động lực của chúng tôi !</p>
             </Row>
@@ -45,35 +43,43 @@ const CartPage = () => {
 
         <Container className='mt-4'> {/* <!----Body Part--> */}
           <span id="p2">Giỏ hàng</span>
-          <Table responsive className='mt-3'>
-            <thead>
-              <tr style={{ verticalAlign:"middle" }}>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+          {
+            cart.length > 0 ? <Table responsive className='mt-3'>
+            <thead className='border'>
+              <tr style={{ verticalAlign:"middle", alignItems: "center" }}>
+                <th colSpan={2}>Sản phẩm</th>
+                <th className='text-center'>Đơn giá</th>
+                <th className='text-center'>Số lượng</th>
+                <th className='text-center'>Số tiền</th>
               </tr>
             </thead>
             <tbody>
-                <CartItem className="border-bottom border-5 border-white" image="assets/image/icecoffee.png" name="Iced Milk Coffee" price={15000} quantity={2}/>
-              <CartItem className="border-bottom border-5 border-white" image="assets/image/latte.png" name="Latte" price={19000} quantity={1}/>
-              <CartItem className="border-bottom border-5 border-white" image="assets/image/orangejuice.png" name="Honey Orange Juice" price={35000} quantity={1}/>
-              <CartItem className="border-bottom border-5 border-white" image="assets/image/chocolate.png" name="Hot Chocolate" price={27000} quantity={1}/>
-              <tr className="border-bottom border-5 border-white" style={{ verticalAlign:"middle" }}>
+
+              {
+                cart.map((c)=><CartItem c={c}/>)
+              }
+              <tr className="border-white" style={{ verticalAlign:"middle" }}>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td className='ms-3 text-center'><h5>Tổng cộng:</h5></td>
-                <td className='ms-3 text-center' style={{ color: "#7d6e53" }}><h5>96.000đ</h5></td>
+                <td className='ms-3 text-center'><h4><strong>Tổng cộng:</strong></h4></td>
+                <td className='ms-3 text-center' style={{ color: "#7d6e53" }}><h5><strong>{sum.toLocaleString()} đ</strong></h5></td>
                 <td><Button className="w-100" variant="primary" onClick={()=>setShowPaymentModal(true)}>Thanh toán</Button></td>
 
               </tr>
             </tbody>
-          </Table>
+          </Table> : <div className='text-center justify-content-center align-items-center d-flex flex-column' style={{ height: "500px" }}><h3>Giỏ hàng trống</h3><p>Hãy thêm thức uống vào giỏ hàng của bạn nào</p>
+          <Button variant="primary" onClick={()=>{
+            scroll.scrollToTop({
+              duration: 100,
+              delay: 0,
+            })
+            navigate("/menu")
+
+          }}>Thêm ngay</Button></div>
+          }
         </Container>
-    <Payment show={paymentModal} onHide={()=>setShowPaymentModal(false)}/>
+    <Payment show={paymentModal} onHide={()=>setShowPaymentModal(false)} total={sum}/>
     </div>
   );
 }

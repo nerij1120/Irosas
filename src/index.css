@@ -2,6 +2,18 @@
   font-family: "DM Serif Display Regular";
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 body {
   margin: 0;
   overflow: hidden;
@@ -36,6 +48,14 @@ main {
   min-height: 40px;
   border-radius: 400px;
   cursor: pointer;
+}
+
+.modal-header{
+  border-bottom: 0 !important;
+}
+
+.modal-footer{
+  border-top: 0 !important;
 }
 
 .btn-primary{
@@ -114,8 +134,8 @@ main {
 .cart-badge{
   background-color: #7D6E83 !important;
   position: absolute;
-  left: 5px;
-  top: -5px ;
+  left: 10px;
+  top: 0px ;
 }
 
 .menu-item {
@@ -211,7 +231,7 @@ main {
 }
 
 .search-bar{
-  width: 400px !important;
+  width: 350px !important;
 }
 
 .form-control:focus{

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { MdOutlineAccountCircle } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth'
 import useDatabase from '../../hooks/useDatabase'
 import RatingStar from './RatingStar'
 import TopAppBar from './TopAppBar'
@@ -11,8 +11,10 @@ const FeedbackDetail = () => {
   const params = useParams()
   const {feedbacks} = useDatabase()
   const [feedback, setFeedback] = useState({})
+  const [user, setUser] = useState({})
   const [reply, setReply] = useState("")
   const navigate = useNavigate();
+  const { accounts } = useAuth()
 
 
   useEffect(()=>{
@@ -23,6 +25,10 @@ const FeedbackDetail = () => {
     }
 
   }, [])  
+
+  useEffect(()=>{
+    accounts.map((acc)=>acc.id === feedback.user? setUser(acc): <></>)
+  }, [accounts, feedback])
 
   const onSubmit = (e) =>{
     e.preventDefault()
@@ -43,8 +49,8 @@ const FeedbackDetail = () => {
       <Container fluid className="px-4 d-flex align-items-center w-100 h-75" >
         <Row className='w-100'>
           <Col>
-            <MdOutlineAccountCircle className='me-2' style={{ width:"50px", height:"50px" }}/>
-            <span>{feedback.userName}</span>
+            <img className='me-2' src={user.photo?user.photo:"/images/profile_pic.jpg"} alt="" style={{ width:"50px", height:"50px", borderRadius: "100px" }}/>
+            <span>{user.name}</span>
           </Col>
           <RatingStar rating={feedback.rating} disabled/>
           <span className="mt-2">{feedback.comment}</span>

@@ -1,15 +1,12 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import { AiOutlineCheck } from 'react-icons/ai'
-import { Link } from 'react-router-dom'
 
-const CheckButton = ({href}) => {
+const CheckButton = ({onClick}) => {
   return (
-    <Link to={href}>
-      <Button className='py-1 px-2' variant='success'>
+      <Button className='py-1 px-2 ms-2' variant='success' onClick={onClick}>
         <AiOutlineCheck/>
       </Button>
-    </Link>
   )
 }
 

@@ -1,8 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 
-const RecommendCategory = ({image, name}) => {
+const RecommendCategory = ({id, image, name}) => {
+  const navigate = useNavigate()
+
+  const navigateToMenu = () =>{      
+      navigate(`/menu?category=${id}`)
+  }
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", cursor: "pointer" }} onClick={navigateToMenu}>
       <img className="img-rcmCate" src={image} alt="" />
       <div id="shape"></div>
       <h5>{name}</h5>

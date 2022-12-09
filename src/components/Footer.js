@@ -17,7 +17,9 @@ const Footer = () => {
         <Row  className='ms-auto ms-sm-2 ms-xs-2'>
           <Col md={5} sm={12} xs={12} className='d-flex footer-row'>
           <FaRegEnvelope style={{ color:"white", marginRight:"10px" }}/>
-          admin.irosas@gmail.com
+          <a href="mailto:admin_irosas@gmail.com" className="menu-item nav-link d-inline-block text-white">
+            admin.irosas@gmail.com
+          </a>
         </Col>
         <Col md={3} sm={12} xs={12} className='d-flex footer-row'>
           <FaPhone style={{ color:"white", marginRight:"10px" }}/>

@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import useAuth from "../hooks/useAuth";
+import useDatabase from '../hooks/useDatabase';
 import background from "../img/ContactPage/backgroudContact.png";
 import DetailButton from './admin/DetailButton';
 import OrderHistoryItem from './OrderHistoryItem';
 
 const HistoryPage = () => {
+  const {orders, foodInOrder} = useDatabase()
+  const {auth} = useAuth()
+
+  const [myOrder, setMyOrder] = useState([])
+
+  useEffect(()=>{
+    setMyOrder(
+      orders.filter((o)=>o.user === auth?.user?.id)
+    )
+  }, [orders, auth])
+
   return (
     <div className='mb-5'>
         <Container fluid 
@@ -42,8 +55,9 @@ const HistoryPage = () => {
           </tr>
         </thead>
         <tbody>
-          <OrderHistoryItem/>
-          <OrderHistoryItem/>
+          {
+            myOrder.map((order)=><OrderHistoryItem item={order}/>)
+          }
         </tbody>
       </Table>
   </Container>

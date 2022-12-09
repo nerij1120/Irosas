@@ -25,7 +25,7 @@ const FeedbackTable = () => {
         <tr style={{ verticalAlign:"middle" }}>
           <th>Tên</th>
           <th>Sản phẩm</th>
-          <th>Bình luận</th>
+          <th style={{ width: "50%" }}>Bình luận</th>
           <th>Đánh giá</th>
           <th>Thao tác</th>
         </tr>

@@ -3,12 +3,38 @@ import { createContext, useEffect, useState } from "react";
 const DatabaseContext = createContext({});
 
 export const DataBaseProvider = ({children}) =>{
+  const [cart, setCart] = useState([
+    {
+      id: 1,
+      drink: 1,
+      quantity: 2,
+      note: ""
+    },
+    {
+      id: 2,
+      drink: 2,
+      quantity: 2,
+      note: "1 ly ít ngọt"
+    },
+    {
+      id: 3,
+      drink: 3,
+      quantity: 2,
+      note: "1 ly ít đá"
+    },
+    {
+      id: 4,
+      drink: 10,
+      quantity: 1,
+      note: "Không đá"
+    },
+  ])
   const [drinks, setDrinks] = useState([
     {
       id: 1,
       name: "Iced Milk Coffee",
       photo: "/assets/image/icecoffee.png",
-      description: "",
+      description: "Made using freshly brewed coffee, 2% fat milk, a sweet, simple syrup, and a good amount of ice cubes for a refreshing start to the day.",
       category: 1,
       price: 15000,
     },
@@ -16,7 +42,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 2,
       name: "Latte",
       photo: "/assets/image/latte.png",
-      description: "",
+      description: "Milk coffee that is a made up of one or two shots of espresso, steamed milk and a final, thin layer of frothed milk on top. If you don't drink dairy milk, you can easily swap it for a plant-based alternative like soy, oat or coconut milk.",
       category: 1,
       price: 19000,
     },
@@ -24,7 +50,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 3,
       name: "Honey Orange Juice",
       photo: "/assets/image/orangejuice.png",
-      description: "",
+      description: "Perfect for increasing springtime agni, astringent honey also helps to dry melting Kapha.",
       category: 7,
       price: 35000,
     },
@@ -32,7 +58,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 4,
       name: "Hot Ginger Juice",
       photo: "/assets/image/gingerjuice.png",
-      description: "",
+      description: "Ginger Juice is one powerful recipe! It is equally packed with health benefits and flavor. It is a warming, spicy, sweet, and delicious way to get ginger into your diet daily!",
       category: 7,
       price: 29000,
     },
@@ -40,7 +66,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 5,
       name: "Hot Fresh Tea",
       photo: "/assets/image/freshtea.png",
-      description: "",
+      description: "Fresh tea leaves can be brewed in hot water to create a sensationally smooth and delicious cup of tea. And you can drink it all day! Fresh tea leaves don’t get bitter - just keep adding hot water to your raw fresh tea leaves throughout the day. No need to remove the leaves from your mug if you don’t want to. Plus, the antioxidants go up on the second infusion, so you want to re-infuse them multiple times.",
       category: 2,
       price: 17000,
     },
@@ -48,7 +74,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 6,
       name: "Thai Tea",
       photo: "/assets/image/thaitea.png",
-      description: "",
+      description: "Thai tea is a worldwide favorite beverage at Thai restaurants, including those in the United States. It’s a culinary combo of Thai street tea and the Western love for sweetened and strongly flavored iced beverages.",
       category: 3,
       price: 25000,
     },
@@ -56,7 +82,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 7,
       name: "Strawberry Cocktail",
       photo: "/assets/image/strawberry.png",
-      description: "",
+      description: "There’s nothing better than the vibrant, fruity flavor of a ripe strawberry. So why not bottle up that flavor and use it in strawberry alcoholic drinks? Some of our very favorite cocktail recipes use this ripe berry, be it fresh or frozen! Match it with just about any alcohol: rum, tequila, vodka, and champagne all pair perfectly.",
       category: 8,
       price: 39000,
     },
@@ -64,15 +90,15 @@ export const DataBaseProvider = ({children}) =>{
       id: 8,
       name: "Americano",
       photo: "/assets/image/americano.png",
-      description: "",
+      description: " An americano is just water and espresso. It'll either be served 1/2 and 1/2 or 1/3 espresso to 2/3 water, depending on the coffee shop in question or how you've chosen to brew it. Traditionally, there will be no milk but some people may add it depending on their personal preference.",
       category: 1,
       price: 20000,
     },
     {
       id: 9,
-      name: "Capuchino",
+      name: "Cappuccino",
       photo: "/assets/image/capuchino.png",
-      description: "",
+      description: "The perfect balance of espresso, steamed milk and foam. This coffee is all about the structure and the even splitting of all elements into equal thirds. An expertly made cappuccino should be rich, but not acidic and have a mildly sweet flavouring from the milk.",
       category: 1,
       price: 22000,
     },
@@ -80,7 +106,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 10,
       name: "Black Coffee",
       photo: "/assets/image/blackcoffee.png",
-      description: "",
+      description: "A beverage made from roasted coffee beans. The beans are ground and soaked in water, which releases their flavor, color, caffeine content, and nutrients. Although coffee is often served hot, it can also be served iced.",
       category: 1,
       price: 15000,
     },
@@ -88,7 +114,7 @@ export const DataBaseProvider = ({children}) =>{
       id: 11,
       name: "Hot Chocolate",
       photo: "/assets/image/chocolate.png",
-      description: "",
+      description: "Hot chocolate is a thick beverage made of melted, solid chocolate blended with milk, cream, or water. Hot cocoa is much thinner than melted chocolate. Added sugar: Hot cocoa often requires you to add sugar to it to adequately sweeten it.",
       category: 6,
       price: 27000,
     },
@@ -96,7 +122,15 @@ export const DataBaseProvider = ({children}) =>{
       id: 12,
       name: "Matcha Ice Blended",
       photo: "/assets/image/matcha.png",
-      description: "",
+      description: "Do you prefer your matcha drinks blended? Do you want to leave behind the workout of a vigorous whisk for the carefree control of a blender? Are you trying to kick your addiction to milkshakes and in need of a substitute? Then we have the drink for you!\n Using a blender takes the finesse and guesswork out of the mixing process, so beginners and matcha maniacs alike can create deliciously smooth drinks. Follow this can’t-mess-up recipe to enjoy the creamy goodness of a blended matcha latte in minutes. ",
+      category: 4,
+      price: 39000,
+    },
+    {
+      id: 13,
+      name: "Matcha Ice Blended",
+      photo: "/assets/image/matcha.png",
+      description: "Do you prefer your matcha drinks blended? Do you want to leave behind the workout of a vigorous whisk for the carefree control of a blender? Are you trying to kick your addiction to milkshakes and in need of a substitute? Then we have the drink for you!\n Using a blender takes the finesse and guesswork out of the mixing process, so beginners and matcha maniacs alike can create deliciously smooth drinks. Follow this can’t-mess-up recipe to enjoy the creamy goodness of a blended matcha latte in minutes. ",
       category: 4,
       price: 39000,
     },
@@ -158,99 +192,174 @@ export const DataBaseProvider = ({children}) =>{
     },
   ]);
 
-  const [orders, setOrders] = useState([
+  const [foodInOrder, setFoodInOrder] = useState([
     {
       id: 1,
-      name: "Lê Văn An",
-      address: "34/35 Nguyễn Thị Minh Khai",
-      status: "Đang giao hàng",
-      phone: "0832328590",
-      total: "34000",
+      order: 1,
+      drink: 1,
+      quantity: 2,
+      note: ""
     },
     {
       id: 2,
-      name: "Nguyễn Hồng Ân",
-      address: "12/5 Tạ Quang Bửu",
-      status: "Chờ xác nhận",
-      phone: "0833658792",
-      total: "34000",
+      order: 1,
+      drink: 2,
+      quantity: 2,
+      note: "1 ly ít ngọt"
     },
     {
       id: 3,
-      name: "Tô Minh Vũ",
+      order: 1,
+      drink: 3,
+      quantity: 2,
+      note: "1 ly ít đá"
+    },
+    {
+      id: 4,
+      order: 1,
+      drink: 10,
+      quantity: 1,
+      note: "Không đá"
+    },
+    {
+      id: 5,
+      order: 2,
+      drink: 8,
+      quantity: 2,
+      note: ""
+    },
+    {
+      id: 6,
+      order: 2,
+      drink: 12,
+      quantity: 1,
+      note: ""
+    },
+    {
+      id: 7,
+      order: 3,
+      drink: 11,
+      quantity: 1,
+      note: ""
+    },
+    {
+      id: 8,
+      order: 3,
+      drink: 9,
+      quantity: 1,
+      note: ""
+    },
+    {
+      id: 9,
+      order: 3,
+      drink: 6,
+      quantity: 2,
+      note: ""
+    },
+  ])
+
+  const [orders, setOrders] = useState([
+    {
+      id: 1,
+      name: "Lu Hoang Anh",
+      user: 3,
+      address: "34/35 Nguyễn Thị Minh Khai",
+      status: "Chờ xác nhận",
+      phone: "0832328590",
+      date: "09/12/2022 10:30",
+      total: 168000,
+      method: "COD",
+    },
+    {
+      id: 2,
+      name: "Hoàng Hoài L",
+      user: 14,
+      address: "12/5 Tạ Quang Bửu",
+      status: "Chờ xác nhận",
+      phone: "0833658792",
+      date: "09/12/2022 13:30",
+      total: 94000,
+      method: "Credit",
+    },
+    {
+      id: 3,
+      name: "Lu Hoang Anh",
+      user: 3,
       address: "20/8 Lý Thường Kiệt",
-      status: "Đã giao",
+      status: "Đang pha chế",
       phone: "0236589745",
-      total: "34000",
+      date: "12/12/2022 15:30",
+      total: 114000,
+      method: "Debit",
     },
   ]);
 
   const [feedbacks, setFeedbacks] = useState([
     {
       id: 1,
-      userName: 'Nguyễn Văn A',
+      user: 3,
       drink: 1,
       comment: 'Cà phê ngon, giao nhanh',
       rating: 5,
     },
     {
       id: 2,
-      userName: 'Nguyễn Văn B',
+      user: 3,
       drink: 10,
       comment: 'Cà phê đen nhưng làm quá ngọt',
       rating: 4,
     },{
       id: 3,
-      userName: 'Nguyễn Văn C',
+      user: 3,
       drink: 2,
       comment: 'Cà phê ngon, giao nhanh',
       rating: 5,
     },{
       id: 4,
-      userName: 'Nguyễn Văn D',
+      user: 3,
       drink: 9,
       comment: 'Giao hàng quá chậm',
       rating: 2,
     },{
       id: 5,
-      userName: 'Nguyễn Văn E',
+      user: 14,
       drink: 8,
       comment: 'Cà phê ngon, giao nhanh',
       rating: 5,
     },{
       id: 6,
-      userName: 'Nguyễn Văn F',
+      user: 14,
       drink: 4,
       comment: 'Thái độ phục vụ chưa tốt',
       rating: 4,
     },{
       id: 7,
-      userName: 'Nguyễn Văn G',
+      user: 3,
       drink: 5,
       comment: 'Cà phê ngon, giao nhanh',
       rating: 5,
     },{
       id: 8,
-      userName: 'Nguyễn Văn H',
+      user: 14,
       drink: 6,
       comment: 'Trà sữa không thơm',
       rating: 3,
     },{
       id: 9,
-      userName: 'Nguyễn Văn I',
+      user: 3,
       drink: 12,
       comment: 'Đá xay mịn, thơm, vị matcha rất ngon',
       rating: 5,
     },{
       id: 10,
-      userName: 'Nguyễn Văn J',
+      user: 3,
       drink: 11,
       comment: 'Thái độ nhân viên quá tệ',
       rating: 2,
     },
     {
       id: 11,
-      userName: 'Nguyễn Văn J',
+      user: 14,
       drink: 11,
       comment: 'Thái độ nhân viên quá tệ',
       rating: 2,
@@ -263,7 +372,7 @@ export const DataBaseProvider = ({children}) =>{
   }, [drinks])
 
   return(
-    <DatabaseContext.Provider value={{ drinks, setDrinks, categories, setCategories, orders, setOrders, feedbacks, setFeedbacks }}>
+    <DatabaseContext.Provider value={{ drinks, setDrinks, categories, setCategories, orders, setOrders, feedbacks, setFeedbacks, cart, setCart, foodInOrder, setFoodInOrder }}>
       {children}
     </DatabaseContext.Provider>
   )

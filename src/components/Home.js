@@ -9,7 +9,9 @@ const Home = () => {
   return (
     <div className="">
       <MyNav/>
+      <div style={{ backgroundColor: "#F8FAFB" }}>
       <Outlet/>
+      </div>
       <Footer />
     </div>
   );

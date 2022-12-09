@@ -11,8 +11,8 @@ const TopAppBar = ({title}) => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className='w-100 d-flex'>
             <Nav.Item className='align-items-center d-flex'>{title}</Nav.Item>
-            <DropDownAccount/>
           </Nav>
+          <DropDownAccount/>
         </Navbar.Collapse>
       </Container>
     </Navbar>

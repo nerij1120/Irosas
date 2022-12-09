@@ -147,10 +147,10 @@ export const AuthProvider = ({children}) =>{
     {
       id: 14,
       name: "Hoàng Hoài L",
-      email: "1222n@gmail.com",
+      email: "1222sn@gmail.com",
       password: "123",
       address: "10/39 Chu Văn An",
-      type: 2,
+      type: 3,
       phone: "0832328590",
       photo: "/images/staff_profile.jpg"
     },

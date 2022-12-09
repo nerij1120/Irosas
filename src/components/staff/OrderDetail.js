@@ -4,14 +4,14 @@ import { useNavigate, useParams } from 'react-router'
 import useDatabase from '../../hooks/useDatabase'
 import TopAppBar from '../admin/TopAppBar'
 import CancelOrder from './CancelOrder'
+import FoodInOrderItem from './FoodInOrderItem'
 
 const OrderDetail = () => {
   const [showModal, setShowModal] = useState(false)
   const params = useParams()
   const navigate = useNavigate()
   const [order, setOrder] = useState({})
-  const [status, setStatus] = useState("")
-  const {orders, setOrders} = useDatabase()
+  const {orders, setOrders, foodInOrder} = useDatabase()
 
   useEffect(()=>{
     if(params && params.id){
@@ -22,28 +22,31 @@ const OrderDetail = () => {
 
   }, [orders, params])  
 
-  useEffect(()=>{
-    setStatus(order.status)
-  }, [order.status])
-
-  const onSubmit = (e)=>{
-    e.preventDefault()
-
-    order.status = status 
-
-    console.log(order)
-
-    setOrders(
-      orders.map((ord)=>ord.id == params.id ?
-        order : ord
-      ) 
-    )
-
-    navigate(-1)
-  }
 
   const openModal = () =>{
     setShowModal(true)
+  }
+
+  const handleShipOrder = () =>{
+    order.status = "Đang giao hàng"
+
+    setOrders(
+      orders.map(ord=>
+        ord.id === order.id ?
+        order : ord
+      ) 
+    )
+  }
+
+  const handleConfirmOrder = () =>{
+    order.status = "Đang pha chế"
+
+    setOrders(
+      orders.map(ord=>
+        ord.id === order.id ?
+        order : ord
+      ) 
+    )
   }
 
   const handleCancelOrder = () =>{
@@ -64,7 +67,7 @@ const OrderDetail = () => {
 
     setOrders(
       orders.map(ord=>
-        ord.id === params.id ?
+        ord.id == params.id ?
         order : ord
       ) 
     )
@@ -75,7 +78,7 @@ const OrderDetail = () => {
   return (
     <div style={{ height:"100vh" }}>
       <TopAppBar title="Chi tiết đơn hàng"/>
-      <Container fluid className="mt-3 px-4 d-flex align-items-center w-100 h-75" >
+      <Container fluid className="mt-3 px-4" >
         <Row>
               <h4> Đơn hàng #{order.id}</h4>
               <p>
@@ -87,53 +90,45 @@ const OrderDetail = () => {
               <p>
                   <b className='me-2'>Số điện thoại:</b> {order.phone}
               </p>
-              <p style={{ color: order.status === "Chờ xác nhận" ? 'orange' : order.status === "Đã giao" ? 'green' : order.status === "Đã hủy" ? 'red' : ''  }}>
+              <p>
+                  <b className='me-2'>Ngày đặt:</b> {order.date}
+              </p>
+              <p style={{ color: order.status === "Chờ xác nhận" ? 'orange' : order.status === "Đã giao" ? 'green' : order.status === "Đã hủy" ? 'red' : order.status === "Đang giao hàng" ? 'gold' : order.status === "Đang pha chế" ? 'burlywood' : ''  }}>
                   <b style={{ color: "black" }} className='me-2'>Tình trạng giao hàng:</b> {order.status}
               </p>
               <p><b>Chi tiết thức uống: </b></p>
                 <Table>
                       <thead>
-                      <tr >
+                      <tr>
                         <th>Tên món</th>
-                        <th>Số lượng</th>
+                        <th className='text-center'>Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
                         <th>Ghi chú</th>
                       </tr>
                       </thead>
                     <tbody>
+                      {
+                        foodInOrder.map((f)=>f.order==params.id?<FoodInOrderItem item={f}/>:<></>)
+                      }
                       <tr>
-                        <td>Cafe</td>
-                        <td >1</td>
-                        <td>15.000</td>
-                        <td>15.000</td>
-                        <td>Ít đường</td>
-                      </tr>
-                      <tr>
-                        <td>Trà</td>
-                        <td>1</td>
-                        <td>20.000</td>
-                        <td>20.000</td>
-                        <td>Ít đường</td>
-                      </tr>
-                      <tr>
-                        <td>Cafe-sữa</td>
-                        <td>1</td>
-                        <td>25.000</td>
-                        <td>25.000</td>
-                        <td>Ít đường</td>
+                        <td></td>
+                        <td></td>
+                        <td>Phí giao hàng:</td>
+                        <td>15,000 đ</td>
+                        <td></td>
                       </tr>
                       <tr style={{ border: "0 solid transparent" }}>
                         <td></td>
                         <td></td>
-                        <td><h5>Tổng cộng:</h5></td>
-                        <td style={{ color: "#7d6e53" }}><h5>60 000đ</h5></td>
+                        <td><h5><strong>Tổng cộng:</strong></h5></td>
+                        <td style={{ color: "#7d6e53" }}><h5><strong>{order.total?.toLocaleString()} đ</strong></h5></td>
                         <td></td>
                     </tr>
                     </tbody>
                   </Table>
-      <Form id="order-form" onSubmit={onSubmit}>
-        <Row  style={{ visibility: (order.status !== "Đã hủy" && order.status !== "Đã giao") ? 'visible' : 'hidden' }}>
+      {/* <Form id="order-form" onSubmit={onSubmit}> */}
+        {/* <Row  style={{ visibility: (order.status !== "Đã hủy" && order.status !== "Đã giao") ? 'visible' : 'hidden' }}>
           <Col className='d-inline-flex' style={{ alignItems:"center" }}>
             Tình trạng đơn hàng: 
             <Form.Group controlId="formStatus">
@@ -145,14 +140,14 @@ const OrderDetail = () => {
               </Form.Select>
             </Form.Group>
           </Col>
-        </Row>
+        </Row> */}
         <div>
           {
             order?.status === "Chờ xác nhận"
               ? (<Col className='float-end'>
                   <Button className="me-2" variant='outline-primary' onClick={()=>navigate(-1)}>Trở về</Button>
                   <Button className="me-2" variant='secondary' onClick={openModal}>Hủy đơn</Button>
-                  <Button type="submit" variant='primary'>Xác nhận</Button>
+                  <Button variant='primary' onClick={handleConfirmOrder}>Xác nhận</Button>
                 </Col>)
               : order?.status === "Đang giao hàng"
                 ? (
@@ -166,7 +161,7 @@ const OrderDetail = () => {
                   ? (
                     <Col className='float-end'>
                       <Button className="me-2" variant='outline-primary' onClick={()=>navigate(-1)}>Trở về</Button>
-                      <Button type="submit" variant='primary'>Cập nhật</Button>
+                      <Button variant='primary' onClick={handleShipOrder}>Xác nhận giao hàng</Button>
                     </Col>
                   )
                   : (<Col className='float-end'>
@@ -174,7 +169,7 @@ const OrderDetail = () => {
                     </Col>)
           }
         </div>
-      </Form>
+      {/* </Form> */}
 
       </Row>
 

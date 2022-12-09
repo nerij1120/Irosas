@@ -51,7 +51,7 @@ const DrinkTable = () => {
           <tr style={{ verticalAlign:"middle" }}>
             <th>Tên</th>
             <th>Hình ảnh</th>
-            <th>Giới thiệu</th>
+            <th style={{ width: "50%" }}>Giới thiệu</th>
             <th>Danh mục</th>
             <th>Giá</th>
             <th>Thao tác</th>

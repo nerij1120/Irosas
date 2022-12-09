@@ -7,6 +7,7 @@ import { BsCart2 } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useDatabase from "../hooks/useDatabase";
 import OutlineButton from "./OutlineButton";
 import SearchBox from "./SearchBox";
 import UserProf from "./UserProf";
@@ -16,6 +17,7 @@ const MyNav = () => {
   const {auth} = useAuth();
   const toggler = useRef()
   const navbar = useRef()
+  const {cart} = useDatabase()
 
 
   const onClick = () => {
@@ -50,15 +52,15 @@ const MyNav = () => {
                 ? (<Link to="/admin" className="menu-item nav-link" onClick={toggleCollapse}>Quản lý</Link>)
                 : auth?.user?.type === 2 
                   ? (<Link to="/staff" className="menu-item nav-link" onClick={toggleCollapse}>Nhân viên</Link>)
-                  : <></>
+                  : <NavLink to="cart" className='cart-item nav-link' style={{ position:"relative" }} onClick={toggleCollapse}>
+                  <BsCart2 className='cart'/>
+                  Giỏ hàng
+                  <Badge bg="secondary" className="ms-2 cart-badge">
+                    {cart.length}
+                  </Badge>
+                </NavLink>
             }
-            <NavLink to="cart" className='cart-item nav-link' style={{ position:"relative" }} onClick={toggleCollapse}>
-              <BsCart2 className='cart'/>
-              Giỏ hàng
-              <Badge bg="secondary" className="ms-2 cart-badge">
-                9
-              </Badge>
-            </NavLink>
+            
           </Nav>
           {
             auth?.user 

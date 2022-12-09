@@ -4,6 +4,7 @@ import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import img from "../img/login_bg.jpg";
 
@@ -23,17 +24,36 @@ const LoginPage = () => {
 
     // Check login
     var success = false
-    accounts.map(user=>{
+    accounts.map((user)=>{
       if(user.email === email && user.password === password){
         setAuth({ user });
         setEmail("")
         setPassword("")
         success = true
+        Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: "true",
+        }).fire(
+          {
+            icon: "success",
+            text: "Đăng nhập thành công"
+          }
+        )
       }
-    })
+    }
+  )
 
     if(!success){
-      alert("Tài khoản hoặc mật khẩu sai")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Đăng nhập thất bại",
+          text: "Email hoặc mật khẩu sai",
+        }
+      )
     }
   }
 
@@ -92,7 +112,7 @@ const LoginPage = () => {
             />
           </Form.Group>
           <p className="font-weight-normal text-end">
-          <Link to="/forgot_password" className="text-dark m-2" style={{ textDecoration: "none" }}>
+          <Link className="text-dark m-2" style={{ textDecoration: "none" }}>
             Quên mật khẩu?
           </Link>
         </p>

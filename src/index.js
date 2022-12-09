@@ -6,6 +6,16 @@ import { AuthProvider } from './context/AuthProvider';
 import { DataBaseProvider } from './context/DatabaseProvider';
 import './index.css';
 
+
+import Swal from 'sweetalert2';
+const toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: "true",
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { useNavigate } from 'react-router';
 import useDatabase from "../hooks/useDatabase";
 import background from "../img/ContactPage/backgroudContact.png";
 import MenuItem from './MenuItem';
@@ -9,6 +10,9 @@ import RecommendCategory from './RecommendCategory';
 
 const HomePage = () => {
   const {drinks, categories} = useDatabase()
+  const navigate = useNavigate()
+  const reversed = [...drinks].reverse();
+
 
   return (
     <div className='mb-5'>
@@ -26,7 +30,7 @@ const HomePage = () => {
             <p id="p2">nguyên chất</p>
             <p id="p3">"Tràn đầy năng lượng mỗi ngày cùng thức uống tuyệt vời"</p>
             <Col>
-              <Button Button className="btn-default get"> Đặt ngay <i class="fas fa-long-arrow-right" id="arrowGet"></i></Button>
+              <Button Button className="btn-default get" onClick={()=>navigate("/menu")}> Đặt ngay <i class="fas fa-long-arrow-right" id="arrowGet"></i></Button>
             </Col>
             </Row>
 
@@ -35,7 +39,7 @@ const HomePage = () => {
         <Container className='mt-4'> {/* <!----Body Part--> */}
             <Col className="d-flex align-items-center">  {/* <!-----headline-feature-product--> */}
                 <span id="p4">Bán chạy nhất</span>
-                <Button variant='outline-light' className="view ms-auto">Xem thực đơn
+                <Button variant='outline-light' className="view ms-auto" onClick={()=>navigate("/menu")}>Xem thực đơn
                     <FaLongArrowAltRight className='me-2 ms-2'/>
                 </Button> {/* <!-----End headline-feature-product--> */}
             </Col>
@@ -76,7 +80,7 @@ const HomePage = () => {
 
             <Row  className='mt-3' style={{ justifyContent: "space-around"}}>
               {
-                drinks.reverse().map((drink, idx) => idx < 6 ? <Col md={5} lg={4} xl={3} xs={5} className="m-2 m-sm-1" key={drink.id}>
+                reversed.map((drink, idx) => idx < 6 ? <Col md={5} lg={4} xl={3} xs={5} className="m-2 m-sm-1" key={drink.id}>
                 <MenuItem id={drink.id} img={drink.photo} name={drink.name} price={drink.price}/>
               </Col> : <></> )
               }
@@ -106,7 +110,7 @@ const HomePage = () => {
             <Container fluid id="container-rcmd-cate">  {/* <!---Recommended Category--> */}
                 <Col className="d-flex mt-4 align-items-center">  {/* <!-----headline-feature-product--> */}
                     <span id="p4">Danh mục thức uống</span>
-                    <Button variant="outline-light" className='view-cate ms-auto '>Xem tất cả danh mục
+                    <Button variant="outline-light" className='view-cate ms-auto ' onClick={()=>navigate("/category")}>Xem tất cả danh mục
                         <FaLongArrowAltRight />
                     </Button> {/* <!-----End headline-feature-product--> */}
                 </Col>

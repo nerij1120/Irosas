@@ -13,11 +13,11 @@ const UserProf = ({src,name}) => {
   }
 
   return (
-      <Dropdown>
-        <Dropdown.Toggle variant="light"  className='d-flex login-btn align-items-center'>
+      <Dropdown className='login-btn d-flex align-items-center' style={{ width: "fit-content" }}>
+        <Dropdown.Toggle variant="light">
           <img src={src?src:"images/profile_pic.jpg"} alt="userprofile" className='user-nav me-2'/>
         </Dropdown.Toggle>
-        <Dropdown.Menu style={{ right: "0", left: "auto" }} className="absolute-center">
+        <Dropdown.Menu className="dropdown-menu-end">
           <Dropdown.Header>Chào {name}</Dropdown.Header>
           <Dropdown.Divider/>
           {

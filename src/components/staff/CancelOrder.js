@@ -8,6 +8,7 @@ const CancelOrder = (props) => {
     e.preventDefault()
 
     props.handleCancelOrder()
+    props.onHide()
   }
 
   return (

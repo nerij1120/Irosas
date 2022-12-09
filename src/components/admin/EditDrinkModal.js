@@ -8,6 +8,7 @@ const EditDrinkModal = (props) => {
   const [name, setName] = useState(props.drink.name)
   const [category, setCategory] = useState(props.drink.category)
   const [price, setPrice] = useState(props.drink.price)
+  const [desc, setDesc] = useState(props.drink.description)
   const [photo, setPhoto] = useState(props.drink.photo)
   const imageFormControl = useRef()
   const {categories} = useDatabase()
@@ -46,13 +47,17 @@ const EditDrinkModal = (props) => {
       alert("Vui lòng nhập giá của thức uống")
       return
     }
+    if(!desc){
+      alert("Vui lòng nhập giới thiệu sản phẩm")
+      return
+    }
     if(!photo){
       alert("Vui lòng thêm hình cho thức uống")
       return
     }
 
-    console.log({...props.drink, name: name, category: +category, price: +price, photo: photo})
-    props.editDrink({...props.drink, name: name, category: +category, price: +price, photo: photo})
+    console.log({...props.drink, name: name, category: +category, price: +price, photo: photo, description: desc})
+    props.editDrink({...props.drink, name: name, category: +category, price: +price, photo: photo, description: desc})
 
 
     props.onHide()
@@ -91,7 +96,11 @@ const EditDrinkModal = (props) => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPrice">
           <Form.Label>Giá</Form.Label>
-          <Form.Control type="number" placeholder="Nhập giá" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+          <Form.Control min={1000} type="number" placeholder="Nhập giá" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicDesc" >
+          <Form.Label>Giới thiệu sản phẩm</Form.Label>
+          <Form.Control type="text" as="textarea" rows={5} value={desc} onChange={(e)=>setDesc(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicImage">
           <Form.Label>Hình ảnh</Form.Label>

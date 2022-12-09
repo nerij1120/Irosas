@@ -8,7 +8,8 @@ import useDatabase from '../../hooks/useDatabase'
 const AddDrinkModal = (props) => {
   const [name, setName] = useState('')
   const [category, setCategory] = useState(1)
-  const [price, setPrice] = useState(0)
+  const [desc, setDesc] = useState("")
+  const [price, setPrice] = useState(1000)
   const [photo, setPhoto] = useState(null)
   const imageFormControl = useRef()
   const { categories } = useDatabase()
@@ -42,17 +43,22 @@ const AddDrinkModal = (props) => {
       alert("Vui lòng nhập giá của thức uống")
       return
     }
+    if(!desc){
+      alert("Vui lòng nhập giới thiệu sản phẩm")
+      return
+    }
     if(!photo){
       alert("Vui lòng thêm hình cho thức uống")
       return
     }
     const id = v4()
-    props.addDrink({id, name, category: +category, price: +price, photo})
-    console.log({id, name, category: +category, price: +price, photo})
+    props.addDrink({id, name, category: +category, price: +price, photo, description: desc})
+    console.log({id, name, category: +category, price: +price, photo, description: desc})
 
     setName("")
     setCategory(1)
-    setPrice(0)
+    setPrice(1000)
+    setDesc("")
     setPhoto(null)
 
     props.onHide()
@@ -79,7 +85,7 @@ const AddDrinkModal = (props) => {
       <Modal.Body>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Tên</Form.Label>
-          <Form.Control type="text" placeholder="Nhập tên" value={name} onChange={(e)=>setName(e.target.value)} />
+          <Form.Control type="text" value={name} onChange={(e)=>setName(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCategory">
           <Form.Label>Danh mục</Form.Label>
@@ -96,7 +102,11 @@ const AddDrinkModal = (props) => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPrice" >
           <Form.Label>Giá</Form.Label>
-          <Form.Control type="number" placeholder="Nhập giá" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+          <Form.Control min={1000} type="number" value={price} onChange={(e)=>setPrice(e.target.value)}/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicDesc" >
+          <Form.Label>Giới thiệu sản phẩm</Form.Label>
+          <Form.Control type="text" as="textarea" rows={5} value={desc} onChange={(e)=>setDesc(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicImage">
           <Form.Label>Hình ảnh</Form.Label>
