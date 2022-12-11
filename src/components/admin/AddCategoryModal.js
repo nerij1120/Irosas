@@ -1,6 +1,7 @@
-import React, {useState, useRef} from 'react'
-import { Modal, Button, Form, Row } from 'react-bootstrap'
+import React, { useRef, useState } from 'react'
+import { Button, Form, Modal, Row } from 'react-bootstrap'
 import { BsCameraFill } from 'react-icons/bs'
+import Swal from 'sweetalert2'
 import { v4 } from 'uuid'
 
 const AddCategoryModal = (props) => {
@@ -13,11 +14,23 @@ const AddCategoryModal = (props) => {
     e.preventDefault()
 
     if(!name){
-      alert("Vui lòng nhập tên thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Thêm danh mục thất bại",
+          text: "Không được bỏ trống tên",
+        }
+      )
       return
     }
     if(!photo){
-      alert("Vui lòng thêm hình cho thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Thêm danh mục thất bại",
+          text: "Vui lòng chọn ảnh cho danh mục",
+        }
+      )
       return
     }
     const id = v4()
@@ -28,6 +41,21 @@ const AddCategoryModal = (props) => {
     setPhoto(null)
 
     props.onHide()
+
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Thêm danh mục thành công",
+      }
+    )
   }
 
   const openFileDialog = (e) =>{

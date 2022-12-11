@@ -87,6 +87,15 @@ const OrderDetailModal = (props) => {
                   15.000đ
                 </span>
               </li>
+              <li class="list-group-item d-flex flex-row justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
+                <div className='row text-start'>
+                  <h6 class="my-0">Tích điểm</h6>
+                  <small class="text-muted">Dùng {props.item?.discount} tích điểm </small>
+                </div>
+                <div className='row text-end'>
+                  <small class="text-muted">-{props.item?.discount?.toLocaleString()}đ </small>
+                </div>
+              </li>
               <li class="list-group-item d-flex justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
                 <span><strong>Tổng cộng (VND)</strong></span>
                 <h5 style={{ color: "#7D6E83" }}><strong>{props.item?.total?.toLocaleString()}đ</strong></h5>

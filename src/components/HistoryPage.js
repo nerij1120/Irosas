@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import { animateScroll as scroll } from 'react-scroll';
 import useAuth from "../hooks/useAuth";
 import useDatabase from '../hooks/useDatabase';
 import background from "../img/ContactPage/backgroudContact.png";
@@ -9,6 +11,7 @@ import OrderHistoryItem from './OrderHistoryItem';
 const HistoryPage = () => {
   const {orders, foodInOrder} = useDatabase()
   const {auth} = useAuth()
+  const navigate = useNavigate()
 
   const [myOrder, setMyOrder] = useState([])
 
@@ -43,7 +46,9 @@ const HistoryPage = () => {
           >
             Lịch sử mua hàng
           </p>
-      <Table responsive="lg" className='mt-3'>
+
+      {
+        myOrder.length > 0 ? <Table responsive="lg" className='mt-3'>
         <thead>
           <tr style={{ verticalAlign:"middle" }}>
             <th>#</th>
@@ -59,7 +64,17 @@ const HistoryPage = () => {
             myOrder.map((order)=><OrderHistoryItem item={order}/>)
           }
         </tbody>
-      </Table>
+      </Table> : <div className='text-center justify-content-center align-items-center d-flex flex-column' style={{ height: "500px" }}><h3>Không có lịch sử mua hàng</h3><span>Bạn là khách hàng mới sao ?</span> <p>Hãy đặt hàng ngay nào!</p>
+      <Button variant="primary" onClick={()=>{
+        scroll.scrollToTop({
+          duration: 100,
+          delay: 0,
+        })
+        navigate("/menu")
+
+      }}>Đặt ngay</Button></div>
+      }
+      
   </Container>
     </div>
   )

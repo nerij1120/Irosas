@@ -33,6 +33,7 @@ export const AuthProvider = ({children}) =>{
       phone: "0837128983",
       address: "Dai hoc bach khoa Q10",
       type: 3,
+      point: 20000,
       photo: "/images/customer_profile.png"
     },
     {
@@ -151,6 +152,7 @@ export const AuthProvider = ({children}) =>{
       password: "123",
       address: "10/39 Chu Văn An",
       type: 3,
+      point: 20000,
       phone: "0832328590",
       photo: "/images/staff_profile.jpg"
     },

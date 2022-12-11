@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
-import {v4 as uuidv4} from 'uuid'
+import React, { useState } from 'react'
+import { Button, Form, Modal } from 'react-bootstrap'
+import Swal from 'sweetalert2'
+import { v4 as uuidv4 } from 'uuid'
 
 const AddAccountModal = (props) => {
   const [email, setEmail] = useState('')
@@ -11,20 +12,44 @@ const AddAccountModal = (props) => {
     e.preventDefault()
 
     if(!email){
-      alert("Vui lòng nhập email")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo tài khoản thất bại",
+          text: "Vui lòng nhập email",
+        }
+      )
       return
     }
     if(!name){
-      alert("Vui lòng nhập tên")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo tài khoản thất bại",
+          text: "Không được bỏ trống tên",
+        }
+      )
       return
     }
     if(!password){
-      alert("Vui lòng nhập mật khẩu")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo tài khoản thất bại",
+          text: "Không được bỏ trống mật khẩu",
+        }
+      )
       return
     }
     if(password.length > 32 || password.length < 8)
     {
-      alert("Mật khẩu phải từ 8 - 32 ký tự")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo tài khoản thất bại",
+          text: "Mật khẩu phải từ 8 - 32 ký tự",
+        }
+      )
       return
     }
     const type = props.type
@@ -36,6 +61,21 @@ const AddAccountModal = (props) => {
     setPassword("")
 
     props.onHide()
+
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Tạo tài khoản thành công",
+      }
+    )
   }
 
   return (

@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Form, Modal } from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 const EditAccountModal = (props) => {
   const [email, setEmail] = useState(props.account.email)
@@ -11,25 +12,42 @@ const EditAccountModal = (props) => {
     e.preventDefault()
 
     if(!email){
-      alert("Vui lòng nhập email")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Cập nhật tài khoản thất bại",
+          text: "Không được bỏ trống email",
+        }
+      )
       return
     }
     if(!name){
-      alert("Vui lòng nhập tên")
-      return
-    }
-    if(!phone){
-      alert("Vui lòng nhập số điện thoại")
-      return
-    }
-    if(!address)
-    {
-      alert("Vui lòng nhập địa chỉ")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Cập nhật tài khoản thất bại",
+          text: "Không được bỏ trống tên",
+        }
+      )
       return
     }
     console.log({...props.account, email: email, name: name, phone: phone, address: address})
     props.editAccount({...props.account, email: email, name: name, phone: phone, address: address})
 
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Cập nhật tài khoản thành công",
+      }
+    )
 
     props.onHide()
   }

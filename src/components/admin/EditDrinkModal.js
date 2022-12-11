@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Button, Form, Modal, Row } from 'react-bootstrap'
 import { BsCameraFill } from 'react-icons/bs'
+import Swal from 'sweetalert2'
 import useDatabase from '../../hooks/useDatabase'
 
 
@@ -36,29 +37,73 @@ const EditDrinkModal = (props) => {
     e.preventDefault()
 
     if(!name){
-      alert("Vui lòng nhập tên thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Không được bỏ trống tên",
+        }
+      )
       return
     }
     if(!category){
-      alert("Vui Long chọn danh mục của thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Vui lòng chọn danh mục",
+        }
+      )
       return
     }
     if(!price){
-      alert("Vui lòng nhập giá của thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Không được bỏ trống giá tiền",
+        }
+      )
       return
     }
     if(!desc){
-      alert("Vui lòng nhập giới thiệu sản phẩm")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Không được bỏ trống giới thiệu",
+        }
+      )
       return
     }
     if(!photo){
-      alert("Vui lòng thêm hình cho thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Vui lòng chọn ảnh thức uống",
+        }
+      )
       return
     }
 
     console.log({...props.drink, name: name, category: +category, price: +price, photo: photo, description: desc})
     props.editDrink({...props.drink, name: name, category: +category, price: +price, photo: photo, description: desc})
 
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Cập nhật thức uống thành công",
+      }
+    )
 
     props.onHide()
   }

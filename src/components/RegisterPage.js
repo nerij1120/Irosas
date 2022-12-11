@@ -3,6 +3,7 @@ import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { v4 } from "uuid";
 import useAuth from "../hooks/useAuth";
 import img from "../img/login_bg.jpg";
@@ -18,14 +19,26 @@ const LoginPage = () => {
     e.preventDefault()
 
     if(confirmPassword !== password){
-      alert("Mật khẩu xác nhận không khớp")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo tài khoản thất bại",
+          text: "Mật khẩu không trùng khớp, vui lòng kiểm tra lại",
+        }
+      )
       return;
     }
 
     var isExisted = false 
     accounts?.map(user =>{
         if(email === user.email){
-          alert("Email đã được sử dụng, vui lòng dùng Email khác");
+          Swal.fire(
+            {
+              icon: "error",
+              title: "Tạo tài khoản thất bại",
+              text: "Email đã tồn tại, vui lòng dùng email khác",
+            }
+          )
           isExisted = true
         }
       }
@@ -40,13 +53,26 @@ const LoginPage = () => {
         phone: "",
         address: "",
         type: 3,
+        point: 0,
         photo: "/images/customer_profile.png"
       }
 
       setAccounts([...accounts, user])
-      alert("Tạo tài khoản thành công")
-
-      navigate(-1)
+      Swal.mixin(
+        {
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        }
+      ).fire(
+        {
+          icon: "success",
+          text: "Tạo tài khoản thành công",
+        }
+      )
+      navigate("/login")
     }
     
   }

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 
 const DeleteCategoryModal = (props) => {
@@ -9,6 +10,20 @@ const DeleteCategoryModal = (props) => {
     props.deleteCategory(props.category.id)
 
     props.onHide()
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Xóa danh mục thành công",
+      }
+    )
   }
 
   return (

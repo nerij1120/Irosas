@@ -1,13 +1,14 @@
 import React, { useRef, useState } from 'react'
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
+import Swal from 'sweetalert2'
 import useAuth from '../../hooks/useAuth'
 import PrimaryButton from './../PrimaryButton'
 
 const ProfilePage = (props) => {
-  const {auth, setAuth} = useAuth();
+  const {auth, setAuth, accounts, setAccounts} = useAuth();
   const navigate = useNavigate()
-  const [email, setEmail] = useState(auth?.user?.email || "")
+  const email = auth?.user?.email || ""
   const [name, setName] = useState(auth?.user?.name || "")
   const [phone, setPhone] = useState(auth?.user?.phone || "")
   const [address, setAddress] = useState(auth?.user?.address || "")
@@ -18,16 +19,24 @@ const ProfilePage = (props) => {
   const onSubmit = (e) =>{
     e.preventDefault()
 
-    if(!email){
-      alert("Vui lòng nhập email")
-      return;
-    }
-    if(!name){
-      alert("Vui lòng nhập tên")
-      return;
-    }
+    setAuth({ user: {...auth?.user, name: name, phone: phone, address: address, photo: photo}})
+    setAccounts(
+      accounts.map((acc)=>acc.id === auth?.user?.id ? auth?.user : acc)
+    )
 
-    setAuth({ user: {...auth?.user, email: email, name: name, phone: phone, address: address, photo: photo}})
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire({
+      icon: "success",
+      text: "Cập nhật thông tin thành công"
+    })
+
     navigate(-1)
   }
 
@@ -84,7 +93,7 @@ const ProfilePage = (props) => {
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="form-group">
                       <label for="eMail">Email</label>
-                      <input type="email" class="form-control" name="email" id="eMail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                      <input type="email" class="form-control" name="email" id="eMail" disabled value={email}/>
                     </div>
                   </div>
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

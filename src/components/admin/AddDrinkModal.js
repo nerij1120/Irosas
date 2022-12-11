@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Button, Form, Modal, Row } from 'react-bootstrap'
 import { BsCameraFill } from 'react-icons/bs'
+import Swal from 'sweetalert2'
 import { v4 } from 'uuid'
 import useDatabase from '../../hooks/useDatabase'
 
@@ -32,23 +33,53 @@ const AddDrinkModal = (props) => {
     e.preventDefault()
 
     if(!name){
-      alert("Vui lòng nhập tên thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Không được bỏ trống tên",
+        }
+      )
       return
     }
     if(!category){
-      alert("Vui Long chọn danh mục của thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Vui lòng chọn danh mục",
+        }
+      )
       return
     }
     if(!price){
-      alert("Vui lòng nhập giá của thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Không được bỏ trống giá tiền",
+        }
+      )
       return
     }
     if(!desc){
-      alert("Vui lòng nhập giới thiệu sản phẩm")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Không được bỏ trống giới thiệu",
+        }
+      )
       return
     }
     if(!photo){
-      alert("Vui lòng thêm hình cho thức uống")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Tạo thức uống thất bại",
+          text: "Vui lòng chọn ảnh thức uống",
+        }
+      )
       return
     }
     const id = v4()
@@ -62,6 +93,20 @@ const AddDrinkModal = (props) => {
     setPhoto(null)
 
     props.onHide()
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Tạo thức uống thành công",
+      }
+    )
   }
 
   const openFileDialog = (e) =>{

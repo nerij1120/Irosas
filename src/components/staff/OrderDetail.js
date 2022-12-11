@@ -118,6 +118,16 @@ const OrderDetail = () => {
                         <td>15,000 đ</td>
                         <td></td>
                       </tr>
+                      {
+                        order.discount !== 0 ? <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Giảm giá:</td>
+                        <td className='text-muted'>- {order.discount.toLocaleString()} đ</td>
+                        <td></td>
+                      </tr> : <></>
+                      }
+                      
                       <tr style={{ border: "0 solid transparent" }}>
                         <td></td>
                         <td></td>

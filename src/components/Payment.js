@@ -8,7 +8,8 @@ import useDatabase from '../hooks/useDatabase'
 import PaymentItem from './PaymentItem'
 
 const Payment = (props) => {
-  const {auth} = useAuth()
+  const {auth, setAuth} = useAuth()
+  const [usePoint, setUsePoint] = useState(false)
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [address, setAddress] = useState("")
@@ -25,6 +26,7 @@ const Payment = (props) => {
                     + currentdate.getHours() + ":"  
                     + currentdate.getMinutes()
     const id = v4()
+    var discount = usePoint ? auth?.user?.point : 0
     setOrders(
       [
         ...orders,
@@ -36,7 +38,8 @@ const Payment = (props) => {
           date: datetime,
           status: "Chờ xác nhận",
           method: method,
-          total: props.total + 15000,
+          discount: usePoint?discount:0,
+          total: props.total + 15000 - discount,
           user: auth?.user?.id
         }
       ]
@@ -70,6 +73,10 @@ const Payment = (props) => {
 
 
     setCart([])
+
+    if(usePoint){
+      setAuth({user: {...auth?.user, point: 0}})
+    }
 
     props.onHide()
   }
@@ -111,9 +118,21 @@ const Payment = (props) => {
                   15.000đ
                 </span>
               </li>
+              <li class="list-group-item d-flex flex-row justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
+                <div className='row text-start'>
+                  <h6 class="my-0">Tích điểm</h6>
+                  <small class="text-muted">Dùng {auth?.user?.point} tích điểm </small>
+                </div>
+                <div className='row text-end'>
+                  <div className='form-check-reversed'>
+                    <input id="point" name="usePoint" disabled={auth?.user?.point === 0} value={usePoint} onChange={()=>setUsePoint(!usePoint)} type="checkbox" class="form-check-input" />
+                  </div>
+                  <small class="text-muted">[-{auth?.user?.point?.toLocaleString()}đ] </small>
+                </div>
+              </li>
               <li class="list-group-item d-flex justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
                 <span><strong>Tổng cộng (VND)</strong></span>
-                <h5 style={{ color: "#7D6E83" }}><strong>{(props.total+15000)?.toLocaleString()}đ</strong></h5>
+                <h5 style={{ color: "#7D6E83" }}><strong>{usePoint?(props.total+15000-20000)?.toLocaleString(): (props.total+15000)?.toLocaleString()} đ</strong></h5>
               </li>
             </div>
           </ul>

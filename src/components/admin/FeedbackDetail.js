@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import useAuth from '../../hooks/useAuth'
 import useDatabase from '../../hooks/useDatabase'
 import RatingStar from './RatingStar'
@@ -34,13 +35,34 @@ const FeedbackDetail = () => {
     e.preventDefault()
 
     if(!reply){
-      alert("Vui lòng điền câu trả lời")
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Gửi thất bại",
+          text: "Vui lòng điển câu trả lời trước khi gửi",
+        }
+      )
       return
     }
 
     setReply("")
 
     navigate("/admin/feedbacks")
+
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Trả lời feedback thành công",
+      }
+    )
   }
 
   return (

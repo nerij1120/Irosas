@@ -1,5 +1,6 @@
 import React from 'react'
-import { Modal, Button, Form } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 
 const DeleteModal = (props) => {
@@ -10,6 +11,21 @@ const DeleteModal = (props) => {
     props.deleteAccount(props.account.id)
 
     props.onHide()
+
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        text: "Xóa tài khoản thành công",
+      }
+    )
   }
   return (
     <Modal
