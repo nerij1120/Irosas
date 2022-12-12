@@ -32,7 +32,7 @@ const DeleteCategoryModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Form style={{ backgroundColor:"#DFD3C3" }} onSubmit={onSubmit}>
+      <Form style={{ backgroundColor:"#DFD3C3", borderRadius: ".5rem" }} onSubmit={onSubmit}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100 text-center">
           Xóa danh mục

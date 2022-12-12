@@ -85,6 +85,8 @@ const DetailsPage = () => {
         }
       )
     }
+    setQuantity(1)
+    setNote("")
   }
 
 

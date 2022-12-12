@@ -55,9 +55,11 @@ const MyNav = () => {
                   : <NavLink to="cart" className='cart-item nav-link' style={{ position:"relative" }} onClick={toggleCollapse}>
                   <BsCart2 className='cart'/>
                   Giỏ hàng
-                  <Badge bg="secondary" className="ms-2 cart-badge">
+                  {
+                    cart.length > 0 ? <Badge bg="secondary" className="ms-2 cart-badge">
                     {cart.length}
-                  </Badge>
+                  </Badge> : <></>
+                  }
                 </NavLink>
             }
             

@@ -5,7 +5,7 @@ import useDatabase from '../hooks/useDatabase'
 import PaymentItem from './PaymentItem'
 
 const OrderDetailModal = (props) => {
-  const {cart, foodInOrder, setOrders, orders} = useDatabase()
+  const { foodInOrder, setOrders, orders} = useDatabase()
   const [method, setMethod] = useState("COD")
   const [myFood, setMyFood] = useState([])
   const [name, setName] = useState("")
@@ -57,7 +57,7 @@ const OrderDetailModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Form onSubmit={onSubmit}>
+      <Form style={{ borderRadius: ".5rem" }} onSubmit={onSubmit}>
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100 text-center" style={{ color: "#7d6e83", fontStyle: "italic", fontSize: "30px" }}>
@@ -90,10 +90,10 @@ const OrderDetailModal = (props) => {
               <li class="list-group-item d-flex flex-row justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
                 <div className='row text-start'>
                   <h6 class="my-0">Tích điểm</h6>
-                  <small class="text-muted">Dùng {props.item?.discount} tích điểm </small>
+                  <small class="text-muted">Dùng {props.item?.discount||0} tích điểm </small>
                 </div>
                 <div className='row text-end'>
-                  <small class="text-muted">-{props.item?.discount?.toLocaleString()}đ </small>
+                  <small class="text-muted">- {(props.item?.discount||0)?.toLocaleString()}đ </small>
                 </div>
               </li>
               <li class="list-group-item d-flex justify-content-between" style={{ backgroundColor: "#DFD3C3" }}>
@@ -101,6 +101,11 @@ const OrderDetailModal = (props) => {
                 <h5 style={{ color: "#7D6E83" }}><strong>{props.item?.total?.toLocaleString()}đ</strong></h5>
               </li>
             </div>
+            {
+              props.item?.reason?<p id="TIPS" className='mt-3'>
+              <b>Lý do hủy đơn:</b> {props.item?.reason}
+            </p>: <></>
+            }
           </ul>
         </div>
         <div class="col-md-7 col-lg-8">
@@ -130,10 +135,7 @@ const OrderDetailModal = (props) => {
                 </div>
               </div>
             </div>
-  
             <hr class="my-4"/>
-  
-  
             <h4 class="mb-3">Thông tin thanh toán</h4>
             <div class="my-3">
               <div class="form-check">

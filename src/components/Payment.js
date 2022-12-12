@@ -89,7 +89,7 @@ const Payment = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Form onSubmit={onSubmit}>
+      <Form style={{ borderRadius: ".5rem" }} onSubmit={onSubmit}>
 
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" className="w-100 text-center" style={{ color: "#7d6e83", fontStyle: "italic", fontSize: "30px" }}>

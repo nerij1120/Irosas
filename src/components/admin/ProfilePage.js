@@ -69,7 +69,7 @@ const ProfilePage = (props) => {
         <Row>
           <Col>
             <Row className="justify-content-center">
-            <img className="profile-pic" src={photo?photo:"images/profile_pic.jpg"}  onClick={openFileDialog} alt=""/>
+            <img className="profile-pic p-0" src={photo?photo:"images/profile_pic.jpg"}  onClick={openFileDialog} alt=""/>
               <PrimaryButton style={{ width:"350px", marginTop:"20px", padding:"10px 15px" }} text="Chỉnh sửa ảnh đại diện" onClick={openFileDialog}/>
               <Form className='image-form form-control'  style={{ display: "none" }} >
                 <input ref={imageFormControl} type="file" className='image-form--input' onChange={changeHandler}/>
@@ -85,13 +85,13 @@ const ProfilePage = (props) => {
                     <h4 class="mb-3">Thông tin cá nhân</h4>
                   </div>
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                       <label for="fullName">Họ và tên</label>
                       <input type="text" class="form-control" name="fullName" id="fullName" value={name} onChange={(e)=>setName(e.target.value)}/>
                     </div>
                   </div>
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                       <label for="eMail">Email</label>
                       <input type="email" class="form-control" name="email" id="eMail" disabled value={email}/>
                     </div>
@@ -111,7 +111,7 @@ const ProfilePage = (props) => {
                   </Row>
                   <Row className="gutters">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h4 style={{ marginTop: "20px" }}>Địa chỉ</h4>
+                      <h4 className='mt-3'>Địa chỉ</h4>
                     </div>
                     <Form.Control as="textarea" rows={5} name="address" placeholder="Nhập địa chỉ" value={address} onChange={(e)=>setAddress(e.target.value)} />
                   </Row>

@@ -7,7 +7,7 @@ const CancelOrder = (props) => {
   const handleCancelOrder = (e) =>{
     e.preventDefault()
 
-    props.handleCancelOrder()
+    props.handleCancelOrder(reply)
     props.onHide()
   }
 
@@ -17,7 +17,7 @@ const CancelOrder = (props) => {
     aria-labelledby="contained-modal-title-vcenter"
     centered
   >
-    <Form id='modal-form' style={{ backgroundColor:"#DFD3C3" }} onSubmit={handleCancelOrder}>
+    <Form id='modal-form' style={{ backgroundColor:"#DFD3C3", borderRadius: ".5rem" }} onSubmit={handleCancelOrder}>
 
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-vcenter" className="w-100 text-center">

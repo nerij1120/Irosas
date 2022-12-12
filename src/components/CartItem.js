@@ -55,12 +55,12 @@ const CartItem = ({c}) => {
   }
 
   return (
-    <tr className='border border-top-0' style={{ backgroundColor: "", verticalAlign:"middle" }}>
+    <tr style={{ backgroundColor: "white", verticalAlign:"middle" }}>
       <td colSpan={2}>
         <div className='d-flex flex-row align-items-center'>
           <img className='img-cart ' src={drink?.photo} alt="" style={{ cursor: "pointer" }} onClick={()=>navigate(`/drinks/${drink.id}`)}/>
           <div className='ms-5 me-auto' style={{ height: "fit-content" }}>
-            <h5 id="p3" className="" style={{ display: "inline-block" }}>{drink?.name}</h5>
+            <h5 id="p3" className="" style={{ display: "inline-block", cursor: "pointer" }} onClick={()=>navigate(`/drinks/${drink.id}`)}>{drink?.name}</h5>
             <Form.Group className="mb-3" controlId="formBasicDesc" >
               <Form.Label>Ghi chú</Form.Label>
               <Form.Control type="text" as="textarea"value={c.note} onChange={handleNoteChange}/>
@@ -68,10 +68,8 @@ const CartItem = ({c}) => {
           </div>
         </div>
         </td>
-      <td>
-        <div className='text-center'>
-          <p>{drink?.price?.toLocaleString()} đ</p>
-        </div>
+      <td className='text-center'>
+          <span>{drink?.price?.toLocaleString()} đ</span>
       </td>
       <td>
         <Col className='text-center justify-content-center align-items-center d-flex'>
@@ -81,10 +79,7 @@ const CartItem = ({c}) => {
         </Col>
       </td>
       <td className='text-center'>
-        <Row>
-            <span>Tổng tiền</span>
-            <p>{(drink?.price * c?.quantity).toLocaleString()} đ</p>
-          </Row>
+        <span>{(drink?.price * c?.quantity).toLocaleString()} đ</span>
       </td>
       <td>
           <Button variant="outline-danger" onClick={deleteItem}>

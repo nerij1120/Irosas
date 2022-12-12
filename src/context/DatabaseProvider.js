@@ -3,32 +3,7 @@ import { createContext, useEffect, useState } from "react";
 const DatabaseContext = createContext({});
 
 export const DataBaseProvider = ({children}) =>{
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      drink: 1,
-      quantity: 2,
-      note: ""
-    },
-    {
-      id: 2,
-      drink: 2,
-      quantity: 2,
-      note: "1 ly ít ngọt"
-    },
-    {
-      id: 3,
-      drink: 3,
-      quantity: 2,
-      note: "1 ly ít đá"
-    },
-    {
-      id: 4,
-      drink: 10,
-      quantity: 1,
-      note: "Không đá"
-    },
-  ])
+  const [cart, setCart] = useState([])
   const [drinks, setDrinks] = useState([
     {
       id: 1,
@@ -267,8 +242,9 @@ export const DataBaseProvider = ({children}) =>{
       status: "Chờ xác nhận",
       phone: "0832328590",
       date: "09/12/2022 10:30",
-      total: 168000,
+      total: 148000,
       method: "COD",
+      discount: 20000,
     },
     {
       id: 2,
@@ -280,6 +256,7 @@ export const DataBaseProvider = ({children}) =>{
       date: "09/12/2022 13:30",
       total: 94000,
       method: "Credit",
+      discount: 0,
     },
     {
       id: 3,
@@ -291,6 +268,7 @@ export const DataBaseProvider = ({children}) =>{
       date: "12/12/2022 15:30",
       total: 114000,
       method: "Debit",
+      discount: 0,
     },
   ]);
 

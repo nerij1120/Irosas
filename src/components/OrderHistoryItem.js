@@ -35,7 +35,7 @@ const OrderHistoryItem = ({item}) => {
 
   return (
     <>
-      <tr style={{ verticalAlign:"middle" }}>
+      <tr style={{ verticalAlign:"middle" }} className="bg-white">
               <td>{item.id}</td>
               <td>{myFood.length}</td>
               <td style={{ color: item.status === "Chờ xác nhận" ? 'orange' : item.status === "Đã giao" ? 'green' : item.status === "Đã hủy" ? 'red' : item.status === "Đang giao hàng" ? 'gold' : item.status === "Đang pha chế" ? 'burlywood' : ''  }}>{item.status}</td>

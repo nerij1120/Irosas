@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { AiFillCheckSquare } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
 import useDatabase from '../../hooks/useDatabase'
 import DetailButton from '../admin/DetailButton'
 import CancelButton from './CancelButton'
@@ -9,15 +7,11 @@ import CheckButton from './CheckButton'
 
 const OrderItem = ({order}) => {
   const [showModal, setShowModal] = useState(false)
-  const navigate = useNavigate()
   const {orders, setOrders} = useDatabase()
 
-  const onClick = () =>{
-    navigate(`order/${order.id}`)
-  }
-
-  const handleCancelOrder = () =>{
+  const handleCancelOrder = (reason) =>{
     order.status = "Đã hủy"
+    order.reason = reason
 
     setOrders(
       orders.map(ord=>

@@ -7,11 +7,9 @@ import Footer from "./Footer";
 import MyNav from "./MyNav";
 const Home = () => {
   return (
-    <div className="">
+    <div style={{ backgroundColor: "#F8FAFB" }}>
       <MyNav/>
-      <div style={{ backgroundColor: "#F8FAFB" }}>
       <Outlet/>
-      </div>
       <Footer />
     </div>
   );

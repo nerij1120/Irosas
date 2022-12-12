@@ -29,7 +29,7 @@ const CartPage = () => {
           backgroundImage: `url(${background})`,
           backgroundRepeat: 'no-repeat',
           width: '100%',
-          height: "80vh",
+          height: "100vh",
           backgroundSize:"100% 100%",
           display: "flex"
         }}> {/* <!------Introducer --> */}
@@ -44,7 +44,7 @@ const CartPage = () => {
         <Container className='mt-4'> {/* <!----Body Part--> */}
           <span id="p2">Giỏ hàng</span>
           {
-            cart.length > 0 ? <Table responsive className='mt-3'>
+            cart.length > 0 ? <Table responsive className='mt-3' >
             <thead className='border'>
               <tr style={{ verticalAlign:"middle", alignItems: "center" }}>
                 <th colSpan={2}>Sản phẩm</th>

@@ -21,7 +21,7 @@ const HomePage = () => {
           backgroundImage: `url(${background})`,
           backgroundRepeat: 'no-repeat',
           width: '100%',
-          height: "80vh",
+          height: "100vh",
           backgroundSize:"100% 100%",
           display: "flex"
         }}> {/* <!------Introducer --> */}

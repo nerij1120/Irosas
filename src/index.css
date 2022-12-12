@@ -102,9 +102,14 @@ main {
 
 .cart {
   color: #7d6e83 !important;
-  margin-right: 15px;
+  margin-right: 10px;
   width: 24px;
   height: 24px;
+}
+
+table {
+  border-collapse:separate; 
+  border-spacing: 0 1em;
 }
 
 .profile-title{

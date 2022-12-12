@@ -49,8 +49,9 @@ const OrderDetail = () => {
     )
   }
 
-  const handleCancelOrder = () =>{
+  const handleCancelOrder = (reason) =>{
     order.status = "Đã hủy"
+    order.reason = reason
 
     setOrders(
       orders.map(ord=>
@@ -78,7 +79,7 @@ const OrderDetail = () => {
   return (
     <div style={{ height:"100vh" }}>
       <TopAppBar title="Chi tiết đơn hàng"/>
-      <Container fluid className="mt-3 px-4" >
+      <Container fluid className="p-4" >
         <Row>
               <h4> Đơn hàng #{order.id}</h4>
               <p>
@@ -96,6 +97,11 @@ const OrderDetail = () => {
               <p style={{ color: order.status === "Chờ xác nhận" ? 'orange' : order.status === "Đã giao" ? 'green' : order.status === "Đã hủy" ? 'red' : order.status === "Đang giao hàng" ? 'gold' : order.status === "Đang pha chế" ? 'burlywood' : ''  }}>
                   <b style={{ color: "black" }} className='me-2'>Tình trạng giao hàng:</b> {order.status}
               </p>
+              {
+                order.reason?<p>
+                <b className='me-2'>Lý do hủy đơn:</b> {order.reason}
+            </p>: <></>
+              }
               <p><b>Chi tiết thức uống: </b></p>
                 <Table>
                       <thead>
@@ -123,7 +129,7 @@ const OrderDetail = () => {
                         <td></td>
                         <td></td>
                         <td>Giảm giá:</td>
-                        <td className='text-muted'>- {order.discount.toLocaleString()} đ</td>
+                        <td className='text-muted'>- {order.discount?.toLocaleString()} đ</td>
                         <td></td>
                       </tr> : <></>
                       }
