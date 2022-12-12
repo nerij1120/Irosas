@@ -22,7 +22,7 @@ const FeedbackTable = () => {
     <Container className='mt-5 d-flex flex-column' fluid>
       <Table responsive="lg" className='mt-3'>
       <thead>
-        <tr style={{ verticalAlign:"middle" }}>
+        <tr className='bg-white' style={{ verticalAlign:"middle" }}>
           <th>Tên</th>
           <th>Sản phẩm</th>
           <th style={{ width: "50%" }}>Bình luận</th>

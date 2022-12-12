@@ -8,7 +8,7 @@ const RecommendCategory = ({id, image, name}) => {
       navigate(`/menu?category=${id}`)
   }
   return (
-    <div style={{ position: "relative", cursor: "pointer" }} onClick={navigateToMenu}>
+    <div className='my-2' style={{ position: "relative", cursor: "pointer" }} onClick={navigateToMenu}>
       <img className="img-rcmCate" src={image} alt="" />
       <div id="shape"></div>
       <h5>{name}</h5>

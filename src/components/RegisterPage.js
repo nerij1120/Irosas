@@ -8,7 +8,7 @@ import { v4 } from "uuid";
 import useAuth from "../hooks/useAuth";
 import img from "../img/login_bg.jpg";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const { accounts, setAccounts } = useAuth()
   const [ email, setEmail ] = useState("")
   const navigate = useNavigate()
@@ -93,15 +93,14 @@ const LoginPage = () => {
           width: "40%",
           display: "flex",
           justifyContent: "center",
-          border: "1px solid #fff",
-          borderRadius: "10pt",
+          borderRadius: ".5rem",
           backgroundColor: "#DFD3C3",
         }}
       >
         <Row>
-        <h2 className="text-center mt-3" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontWeight: "600" }}>IROSAS COFFEE</h2>
-          <h3 className="text-center mt-2" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontWeight: "600" }}>Đăng ký</h3>
-        <Form className="mt-5" onSubmit={onSubmit}>
+        <div className="navbar-brand"><h1 className="text-center mt-3" style={{ color: "#7D6E83" }}>IROSAS</h1></div>
+        <h3 className="text-center mt-3" id="p1" style={{ fontSize: "26px" }}>Đăng ký</h3>
+        <Form onSubmit={onSubmit}>
           <Form.Label>Email</Form.Label>
           <Form.Group className="mb-3">
             <Form.Control
@@ -151,4 +150,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

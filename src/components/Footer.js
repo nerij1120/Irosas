@@ -7,19 +7,20 @@ import {
 const Footer = () => {
   return (
     <Container className='footer' fluid>
-      <span className='copy-right'>Copyright 2022</span>
-      <Container className='d-flex ms-5 me-auto' style={{ alignItems: "center", flex:"1" }}>
+      <Col className="d-flex align-items-center">
+        <span className='copy-right col-1'>Copyright 2022</span>
         <hr className='solid me-2'/>
         <h2 style={{ color:"#fff" }}>Irosas</h2>
-      </Container>
-      
+
       <Container >
-        <Row  className='ms-auto ms-sm-2 ms-xs-2'>
+        <Row className='ms-auto ms-sm-2 ms-xs-2'>
           <Col md={5} sm={12} xs={12} className='d-flex footer-row'>
-          <FaRegEnvelope style={{ color:"white", marginRight:"10px" }}/>
-          <a href="mailto:admin_irosas@gmail.com" className="menu-item nav-link d-inline-block text-white">
-            admin.irosas@gmail.com
-          </a>
+            <span>
+              <FaRegEnvelope style={{ color:"white", marginRight:"10px" }}/>
+              <a href="mailto:admin_irosas@gmail.com" className="nav-link d-inline-block text-white">
+                admin.irosas@gmail.com
+              </a>
+            </span>
         </Col>
         <Col md={3} sm={12} xs={12} className='d-flex footer-row'>
           <FaPhone style={{ color:"white", marginRight:"10px" }}/>
@@ -32,7 +33,7 @@ const Footer = () => {
         </Row>
       
       </Container>
-      
+      </Col>
     </Container>
   )
 }

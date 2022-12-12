@@ -45,12 +45,13 @@ const CartPage = () => {
           <span id="p2">Giỏ hàng</span>
           {
             cart.length > 0 ? <Table responsive className='mt-3' >
-            <thead className='border'>
+            <thead className='border bg-white'>
               <tr style={{ verticalAlign:"middle", alignItems: "center" }}>
                 <th colSpan={2}>Sản phẩm</th>
                 <th className='text-center'>Đơn giá</th>
                 <th className='text-center'>Số lượng</th>
                 <th className='text-center'>Số tiền</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

@@ -3,7 +3,6 @@ import { Col, Container, Row } from 'react-bootstrap';
 import {
   FaMapMarkerAlt, FaPhone, FaRegEnvelope
 } from 'react-icons/fa';
-import { Link } from "react-router-dom";
 import background from "../img/ContactPage/backgroudContact.png";
 import '../index.css';
 export default function ContactsPage() {
@@ -31,7 +30,7 @@ export default function ContactsPage() {
         <Row className="ms-lg-5 my-auto">
           <p>
             <FaRegEnvelope className="me-2"/>
-            <a href="mailto:admin_irosas@gmail.com" className="menu-item nav-link d-inline-block">
+            <a href="mailto:admin_irosas@gmail.com" className="nav-link d-inline-block">
               admin_irosas@gmail.com
             </a>
           </p>

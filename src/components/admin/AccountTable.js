@@ -35,6 +35,7 @@ const AccountTable = () => {
         acc.id === newAccount.id ? newAccount: acc
       )
     )
+
   }
 
   const handleDeleteAccount = (id)=>{
@@ -59,7 +60,7 @@ const AccountTable = () => {
       <DropDownButton openStaffModal={openStaffModal} openManagerModal={openManagerModal} startLogo={<AiOutlinePlus className='me-2'/>} text="Thêm tài khoản" className="d-flex ms-auto me-2"/>
       <Table responsive="lg" className='mt-3'>
       <thead>
-        <tr style={{ verticalAlign:"middle" }}>
+        <tr className='bg-white' style={{ verticalAlign:"middle" }}>
           <th>Tên</th>
           <th>Email</th>
           <th>Địa chỉ</th>

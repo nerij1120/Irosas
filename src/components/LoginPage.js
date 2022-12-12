@@ -79,17 +79,15 @@ const LoginPage = () => {
           width:"40%",
           display: "flex",
           justifyContent: "center",
-          border: "1px solid #fff",
-          borderRadius: "10pt",
+          borderRadius: ".5rem",
           backgroundColor: "#DFD3C3",
         }}
       >
         <Row>
-          <h2 className="text-center mt-3" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontWeight: "600" }}>IROSAS</h2>
-          <h4 className="text-center" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontStyle: "italic" }}>Glad to see you here</h4>
-          <h3 className="text-center" style={{ fontFamily: "Work Sans", color: "#7d6e83", fontWeight: "600" }}>Đăng nhập</h3>
-          <MdOutlineAccountCircle className="ms-auto me-auto" style={{ width: "200px", height:"200px" }}/>
-        <Form  onSubmit={onSubmit} className="mt-3">
+          <div className="navbar-brand"><h1 className="text-center mt-3" style={{ color: "#7D6E83" }}>IROSAS</h1></div>
+          <h4 className="text-center" id="p3">Glad to see you here</h4>
+          <h3 className="text-center mt-3" id="p1" style={{ fontSize: "26px" }}>Đăng nhập</h3>
+        <Form  onSubmit={onSubmit}>
         <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control

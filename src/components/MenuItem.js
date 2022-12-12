@@ -65,7 +65,7 @@ const MenuItem = ({id, img, name, price}) => {
   }
 
   return (
-    <Card style={{ borderRadius: "10pt" }}>
+    <Card style={{ borderRadius: ".5rem" }} className="my-2">
       <Card.Body className='px-0 pt-0 pb-2'>
       <img class="img-bestSeller" src={img} alt=""  onClick={navigateToDetail} style={{ cursor: "pointer" }} />
       <h5 className="product-name ms-2 mt-2">{name}</h5>

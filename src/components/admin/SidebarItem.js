@@ -9,7 +9,7 @@ const SidebarItem = ({title, icon, href}) => {
     <li>
       <NavLink to={href} end className={`d-flex flex-row nav-link py-3 px-2 border-bottom align-items-center`} style={{ color:"black", padding:"1.5rem" }}>
           <div className="bi ms-2">{icon}</div>
-          <span className='ms-3'>{title}</span>
+          <span className='ms-3 nav-ttl'>{title}</span>
       </NavLink>
       
     </li>

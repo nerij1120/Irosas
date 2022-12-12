@@ -64,7 +64,7 @@ const ProfilePage = (props) => {
       <div className='profile-title ms-auto me-auto d-flex'>
         Thông tin cá nhân
       </div>
-      <Container style={{ marginTop:"100px" }}>
+      <Container style={{ marginTop:"50px" }}>
         <Form onSubmit={onSubmit}>
         <Row>
           <Col>

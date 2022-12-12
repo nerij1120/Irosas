@@ -112,7 +112,7 @@ const DetailsPage = () => {
                   </Col>
                   <p className='mt-3'>Ghi chú</p>
                   <Form.Control as="textarea" className='w-75' rows={7} value={note} onChange={(e)=>setNote(e.target.value)}/>
-                  <Button type="submit" className='w-75 mt-4' variant="primary"><h5>Thêm vào giỏ hàng</h5></Button>
+                  <Button type="submit" className='w-75 mt-4' variant="primary"><h5 className='m-1'>Thêm vào giỏ hàng</h5></Button>
                 </Row>
               </Col>
             </Row>  

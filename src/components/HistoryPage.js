@@ -50,7 +50,7 @@ const HistoryPage = () => {
       {
         myOrder.length > 0 ? <Table responsive="lg" className='mt-3'>
         <thead>
-          <tr style={{ verticalAlign:"middle" }}>
+          <tr className='bg-white' style={{ verticalAlign:"middle" }}>
             <th>#</th>
             <th>Số lượng sản phẩm</th>
             <th>Trạng thái</th>

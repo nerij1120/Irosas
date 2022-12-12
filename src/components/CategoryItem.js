@@ -10,7 +10,7 @@ const CategoryItem = ({ id, src, text, alt }) => {
   }
 
   return (
-    <Card style={{ borderRadius: "10pt", cursor: "pointer" }} onClick={navigateToMenu}>
+    <Card style={{ borderRadius: "10pt", cursor: "pointer" }} className="my-2" onClick={navigateToMenu}>
       <Card.Img variant="top" className="img-bestSeller" src={src}alt={alt}/>
       <Card.ImgOverlay className="d-flex">
         <Card.Text className="ms-auto me-auto mt-auto" style={{ color: "white", textSize: "20px", fontWeight:"600" }}>

@@ -48,7 +48,7 @@ const DrinkTable = () => {
       <AddButton onClick={openDrinkModal} text="Thêm thức uống" className="d-flex ms-auto me-2" showDropdown={false}/>
       <Table responsive="lg" className='mt-3'>
         <thead>
-          <tr style={{ verticalAlign:"middle" }}>
+          <tr className='bg-white' style={{ verticalAlign:"middle" }}>
             <th>Tên</th>
             <th>Hình ảnh</th>
             <th style={{ width: "50%" }}>Giới thiệu</th>

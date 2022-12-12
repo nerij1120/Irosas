@@ -347,7 +347,7 @@ export const DataBaseProvider = ({children}) =>{
   useEffect(()=>{
     categories.map((cate)=>cate.quantity = 0)
     drinks.map((drink)=>categories.map((cate)=>cate.id === drink.category?cate.quantity++ : <></>))
-  }, [drinks])
+  }, [drinks, categories])
 
   return(
     <DatabaseContext.Provider value={{ drinks, setDrinks, categories, setCategories, orders, setOrders, feedbacks, setFeedbacks, cart, setCart, foodInOrder, setFoodInOrder }}>

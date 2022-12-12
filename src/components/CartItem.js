@@ -67,7 +67,7 @@ const CartItem = ({c}) => {
             </Form.Group>
           </div>
         </div>
-        </td>
+      </td>
       <td className='text-center'>
           <span>{drink?.price?.toLocaleString()} đ</span>
       </td>
