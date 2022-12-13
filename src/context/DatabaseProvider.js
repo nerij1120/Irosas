@@ -239,7 +239,7 @@ export const DataBaseProvider = ({children}) =>{
       name: "Lu Hoang Anh",
       user: 3,
       address: "34/35 Nguyễn Thị Minh Khai",
-      status: "Chờ xác nhận",
+      status: "Đã giao",
       phone: "0832328590",
       date: "09/12/2022 10:30",
       total: 148000,

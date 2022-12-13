@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useAuth from '../../hooks/useAuth'
 import useDatabase from '../../hooks/useDatabase'
 import DetailButton from '../admin/DetailButton'
 import CancelButton from './CancelButton'
@@ -8,6 +9,7 @@ import CheckButton from './CheckButton'
 const OrderItem = ({order}) => {
   const [showModal, setShowModal] = useState(false)
   const {orders, setOrders} = useDatabase()
+  const {accounts, setAccounts} = useAuth()
 
   const handleCancelOrder = (reason) =>{
     order.status = "Đã hủy"
@@ -29,6 +31,16 @@ const OrderItem = ({order}) => {
         ord.id === order.id ?
         order : ord
       ) 
+    )
+
+    const user = accounts.find(acc=>acc.id === order.user)
+    user.point += order.total * 0.05
+
+    setAccounts(
+      accounts.map(acc=>
+        acc.id === user.id?
+        user : acc
+      )
     )
   }
 

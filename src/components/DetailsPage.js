@@ -20,7 +20,7 @@ const DetailsPage = () => {
   const [note, setNote] = useState("")
 
   useEffect(()=>{
-    setFbs(feedbacks.filter((fb)=>fb.drink===+params.id))
+    setFbs(feedbacks.filter((fb)=>fb.drink==params.id))
   }, [feedbacks, params.id])
 
   useEffect(()=>{

@@ -50,13 +50,13 @@ const OrderHistoryItem = ({item}) => {
                 </Button> 
                 }
                 {
-                  item.status === "Đã giao" ? <Button className="ms-2" variant='secondary' onClick={()=>setShowFeedbackModal(true)}>Đánh giá</Button> : item.status === "Đã hủy" ? <></>  : item.status === "Đang giao hàng" ? <></>: <CancelButton onClick={()=>setShowModal(true)}/>
+                  item.status === "Đã giao" ? item?.feedback === true ? <></> : <Button className="ms-2" variant='secondary' onClick={()=>setShowFeedbackModal(true)}>Đánh giá</Button> : item.status === "Đã hủy" ? <></>  : item.status === "Đang giao hàng" ? <></>: <CancelButton onClick={()=>setShowModal(true)}/>
                 }
               </td>
       </tr>
       <OrderDetailModal item={item} show={showDetailModal} onHide={()=>setShowDetailModal(false)}/>
       <CancelOrder handleCancelOrder={handleCancelOrder} show={showModal} onHide={()=>setShowModal(false)}/>
-      <FeedbackModal show={showFeedbackModal} onHide={()=>setShowFeedbackModal(false)}/>
+      <FeedbackModal item={item} show={showFeedbackModal} onHide={()=>setShowFeedbackModal(false)}/>
     </>
   )
 }

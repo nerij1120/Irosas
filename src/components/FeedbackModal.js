@@ -1,14 +1,66 @@
 import React, { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import Swal from 'sweetalert2'
+import { v4 } from 'uuid'
+import useAuth from '../hooks/useAuth'
+import useDatabase from '../hooks/useDatabase'
 import RatingStar from './admin/RatingStar'
 
 const FeedbackModal = (props) => {
   const [rating, setRating] = useState(1)
   const [comment, setComment] = useState("")
+  const { auth } = useAuth()
+  const {feedbacks, setFeedbacks, foodInOrder, orders, setOrders} = useDatabase()
 
   const onSubmit = (e) =>{
     e.preventDefault()
 
+    var fbs = feedbacks
+
+    foodInOrder.map((f)=>
+      f.order === props.item?.id ?
+      fbs = [...fbs,{
+        id: v4(),
+        user: auth?.user?.id,
+        drink: f.drink,
+        comment: comment,
+        rating: rating
+      }] : <></>
+    )
+
+    console.log(fbs)
+
+    setFeedbacks([
+      ...fbs
+    ])
+
+
+    const order = orders.find(ord=>ord.id === props?.item?.id)
+    order.feedback = true
+    
+    setOrders(
+      orders.map(ord=>
+        ord.id === order.id ?
+        order: ord
+      )
+    )
+
+    Swal.mixin(
+      {
+        toast: true,
+        position: 'top-end',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }
+    ).fire(
+      {
+        icon: "success",
+        title: "Gửi feedback thành công"
+      }
+    )
+
+    props.onHide()
   }
 
   return (

@@ -20,7 +20,7 @@ const FeedbackDetail = () => {
 
   useEffect(()=>{
     if(params && params.id){
-      feedbacks.map((fb)=> fb.id === +params.id ? 
+      feedbacks.map((fb)=> fb.id == params.id ? 
         setFeedback(fb)
       : {})
     }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router'
+import useAuth from '../../hooks/useAuth'
 import useDatabase from '../../hooks/useDatabase'
 import TopAppBar from '../admin/TopAppBar'
 import CancelOrder from './CancelOrder'
@@ -12,6 +13,7 @@ const OrderDetail = () => {
   const navigate = useNavigate()
   const [order, setOrder] = useState({})
   const {orders, setOrders, foodInOrder} = useDatabase()
+  const {accounts, setAccounts} = useAuth()
 
   useEffect(()=>{
     if(params && params.id){
@@ -55,7 +57,7 @@ const OrderDetail = () => {
 
     setOrders(
       orders.map(ord=>
-        ord.id == params.id ?
+        ord.id === order.id ?
         order : ord
       ) 
     )
@@ -68,9 +70,19 @@ const OrderDetail = () => {
 
     setOrders(
       orders.map(ord=>
-        ord.id == params.id ?
+        ord.id === order.id ?
         order : ord
       ) 
+    )
+    
+    const user = accounts.find(acc=>acc.id === order.user)
+    user.point += order.total * 0.05
+
+    setAccounts(
+      accounts.map(acc=>
+        acc.id === user.id ? 
+        user: acc  
+      )
     )
 
     navigate(-1)
